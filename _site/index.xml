@@ -8,11 +8,11 @@
 <title>Francisco J. Rubilar Rocha</title>
 <link>fcorubilarrocha@gmail.com/</link>
 <atom:link href="fcorubilarrocha@gmail.com/index.xml" rel="self" type="application/rss+xml"/>
-<description>Ingeniero Civil Ambiental  |  Magíster en Manejo de Recursos Naturales</description>
+<description>Ingeniero Civil Ambiental | Magíster en Manejo de Recursos Naturales</description>
 <generator>quarto-1.9.37</generator>
 <lastBuildDate>Sat, 02 May 2026 04:00:00 GMT</lastBuildDate>
 <item>
-  <title>Cartografía interactiva de calidad de agua del Lago Budi</title>
+  <title>Repositorio interactivo de la calidad de agua del Lago Budi</title>
   <dc:creator>Francisco Rubilar Rocha</dc:creator>
   <link>fcorubilarrocha@gmail.com/posts/sig-lago-budi/</link>
   <description><![CDATA[ 
@@ -21,9 +21,105 @@
 
 
 
-<section id="sobre-este-visualizador" class="level2">
-<h2 class="anchored" data-anchor-id="sobre-este-visualizador">Sobre este visualizador</h2>
-<p>Esta cartografía interactiva permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra, Región de La Araucanía. La campaña cubrió <strong>17 estaciones de muestreo</strong> distribuidas a lo largo del cuerpo lacustre, con registros tanto en <strong>superficie</strong> como en <strong>lecho</strong>.</p>
+<section id="capitulo-i---la-eutrofización-del-budi-leufu" class="level2">
+<h2 class="anchored" data-anchor-id="capitulo-i---la-eutrofización-del-budi-leufu">Capitulo I - La eutrofización del Budi Leufu</h2>
+<p>El Lago Budi posee una fuerte influencia marina, proveniente del océano pacífico, generando aguas salobres que brindan condiciones únicas de hábitat a un gran número de especies, especialmente, sitios de anidamiento de avifauna endémica. Alrededor de este cuerpo de agua viven más de 7000 personas mapuche agrupadas en decenas de comunidades indígenas con un fuerte arraigo al territorio. El Budi Leufu, es un sitio prioritario según lo indicado en la ley 19.300, art. 11, letra d, y si bien, esta naturaleza jurídica se encuentra ratificada por el Ord. Nº 100143/2010 del SEA, actualmente no existe ningún instrumento de gestión para la protección y el monitoreo de parámetros sanitarios y ambientales de este único e importante cuerpo de agua.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/ISLAHUAPI.jpeg" class="img-fluid figure-img"></p>
+<figcaption><em>Imagen aérea del Sector de Isla Huapi, obtenida con Dron Phantom 4 Pro durante una de las campañas de monitoreo</em></figcaption>
+</figure>
+</div>
+<p>Durante los últimos 20 años, se ha evidenciado una proliferación anormal de algas y cianobacterias, con un aumento drástico de sedimentos nitrogenados y fosfatados acumulados en el lecho del lago, lo que ha provocado su gradual eutrofización (Beth, 2015). En 2024, la SEREMI de Salud Araucanía declaró riesgo sanitario en Puerto Domínguez debido a la alta concentración de coliformes fecales en las playas de esta localidad.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/LAGO_EUTROFIZADO2.jpeg" class="img-fluid figure-img"></p>
+<figcaption><em>Imagen aérea de un florecimiento anormal de algas en el Sector Playa La Chasquilla (Puerto Domínguez), obtenida con Dron Phantom 4 Pro durante una de las campañas de monitoreo</em></figcaption>
+</figure>
+</div>
+<p>Me permito relevar, que no son solo las poblaciones humanas las afectadas por la eutrofización del Lago. Peces y aves, algunos endémicos de la Cuenca del Lago Budi se han visto afectados seriamente por la contaminación. Se estima que los aportes de los nutrientes que provocan la eutrofización del lago tienen su origen en el exceso de aplicación de fertilizantes sintéticos y la infiltración de aguas servidas debido a la ausencia de alcantarillado y PTAS que atiendan a los habitantes de Puerto Domínguez y el sector rural.</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/POCHAS_VARADAS.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Evento de varamiento de ictiofauna, Cheirodon pisciculus</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/LAGO_EUTROFIZADO.jpeg" class="img-fluid figure-img" style="width:110.0%"></p>
+<figcaption>Afectación de hábitat de avifauna, Cisnes de Cuello Negro</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="capítulo-ii---campañas-de-monitoreo-de-calidad-de-agua" class="level2">
+<h2 class="anchored" data-anchor-id="capítulo-ii---campañas-de-monitoreo-de-calidad-de-agua">Capítulo II - Campañas de monitoreo de calidad de agua</h2>
+<p>La iniciativa que diseñé, contempló la adquisición de equipos profesionales de medición multiparamétrica de la calidad del agua salobre y agua dulce, la compra de reactivos para el manejo y calibración de los equipos multiparamétricos, además de la adquisición de un caudalímetro para el aforo de afluentes superficiales de la cuenca.</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/FCORUBILAR_CAMIONETA.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Calibración en terreno de parámetros de Oxígeno Disuelto y pH en sensor HANNA HI98594</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/GOREyFCORUBILAR.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Demostración de uso de sensor multiparamétrico al Sr.&nbsp;Gobernador de La Araucanía, Don René Saffirio</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>El plan de monitoreo está siendo ejecutado de forma quincenal, midiendo y muestreando en cada campaña 10 puntos de la cuenca que coincidan con las descargas de los afluentes de mayor caudal al Lago Budi. Sin desmedro de ese protocolo, también se ha recopilado información en los sectores donde ha sucedido varamiento de ictiofauna.</p>
+<div class="quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/FCORUBILAR_BOTE.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Medición multiparamétrica de calidad de agua en el interior del Lago Budi, sector “Punta El Toro”</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/FCORUBILAR_LAGO2.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Medición multiparamétrica de calidad de agua en la ribera del Lago Budi, sector “Romopulli”</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>El proyecto contempló levantar un programa de formación en calidad de agua mediante un llamado abierto a la comunidad. A la fecha se han intervenido 2 escuelas rurales y a la <strong>Mesa Territorial de Pueblo Originarios</strong>, a quienes se les ha capacitado para apoyar el programa de medición de parámetros y muestreo del agua a nivel territorial.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/CLASES_AGUA.jpeg" class="img-fluid figure-img"></p>
+<figcaption><em>Taller de calidad de agua para niños de Escuela Rural Sol Naciente de Romopulli. Posterior al taller se dejaron 4 Checkers Digitales para su uso permanente por parte de la Escuela</em></figcaption>
+</figure>
+</div>
+</section>
+<section id="capítulo-iii---cartografía-interactiva-de-calidad-de-agua-del-lago-budi" class="level2">
+<h2 class="anchored" data-anchor-id="capítulo-iii---cartografía-interactiva-de-calidad-de-agua-del-lago-budi">Capítulo III - Cartografía interactiva de calidad de agua del Lago Budi</h2>
+<p>Uno de los resultados generados fue una cartografía interactiva que permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra. La campaña cubrió <strong>17 estaciones de muestreo</strong> distribuidas a lo largo del cuerpo lacustre, con registros tanto en <strong>superficie</strong> como en <strong>lecho</strong>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/FCORUBILAR_BN.jpeg" class="img-fluid figure-img"></p>
+<figcaption><em>Fotografía preparando el sensor multiparamétrico y envases de muestras sobre la lancha en medio del Lago Budi, altura de Isla Nahuelhuapi</em></figcaption>
+</figure>
+</div>
 <p>Para cada punto se midieron ocho parámetros mediante sensor multiparamétrico in situ: pH, oxígeno disuelto (mg/L y porcentaje de saturación), turbiedad (FNU), temperatura, potencial de oxidación-reducción (ORP), conductividad eléctrica, sólidos disueltos totales (TDS) y salinidad (PSU).</p>
 <p>Los resultados se contrastan con los requisitos de la <strong>Norma Chilena NCh1333.Of78 (modificada en 1987)</strong>, en particular el Artículo 7.2.1, Tabla 3, correspondiente a aguas destinadas a recreación con contacto directo (natación, buceo, esquí acuático).</p>
 </section>
@@ -53,10 +149,16 @@
 <p><strong>Sobre el contexto del Lago Budi</strong>: el Budi es una cuenca costera <strong>mixohalina</strong> —cuerpo de agua semi-cerrado con conexión periódica al océano— ubicado en territorio mapuche-lafkenche. Los valores de salinidad varían fuertemente entre sectores conectados al mar y sectores con aporte exclusivo de tributarios dulces. Esta heterogeneidad debe considerarse al interpretar los gradientes espaciales.</p>
 <p><strong>Sobre la NCh1333</strong>: la norma referida regula los requisitos de calidad de agua para distintos usos (consumo humano, riego, recreación, vida acuática). En este visualizador se aplica específicamente la tabla de uso recreativo con contacto directo. Para otros usos (riego, vida acuática), las bandas de cumplimiento son distintas.</p>
 <p><strong>Sobre las limitaciones</strong>: una campaña puntual de un día entrega una fotografía instantánea del estado del cuerpo de agua. Para conclusiones robustas sobre el comportamiento del lago es necesario monitoreo continuo o al menos campañas estacionales repetidas. Este visualizador documenta una jornada específica y debe leerse como tal.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fcorubilarrocha@gmail.com/posts/sig-lago-budi/FCORUBILAR_NOCHE.jpeg" class="img-fluid figure-img"></p>
+<figcaption><em>Fotografía de monitoreo nocturno en sector “Romopulli”</em></figcaption>
+</figure>
+</div>
 </section>
 <section id="datos-y-reproducibilidad" class="level2">
 <h2 class="anchored" data-anchor-id="datos-y-reproducibilidad">Datos y reproducibilidad</h2>
-<p>Las coordenadas de las estaciones están en sistema <strong>WGS84 (EPSG:4326)</strong>. La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).</p>
+<p>Las coordenadas de las estaciones están en sistema <strong>WGS84 (EPSG:32718)</strong>. La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).</p>
 <p>Si trabajas en gestión de cuerpos de agua y te interesa replicar este enfoque metodológico en otra cuenca, puedes escribirme a <a href="mailto:fcorubilarrocha@gmail.com">fcorubilarrocha@gmail.com</a>.</p>
 
 
@@ -64,10 +166,10 @@
 
  ]]></description>
   <category>SIG</category>
-  <category>calidad de agua</category>
+  <category>Calidad de Agua</category>
   <category>Lago Budi</category>
   <category>NCh1333</category>
-  <category>cartografía interactiva</category>
+  <category>Saavedra</category>
   <guid>fcorubilarrocha@gmail.com/posts/sig-lago-budi/</guid>
   <pubDate>Sat, 02 May 2026 04:00:00 GMT</pubDate>
 </item>

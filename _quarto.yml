@@ -2,18 +2,22 @@ project:
   type: website
 
 website:
-  description: "Ingeniero Civil Ambiental  |  Magíster en Manejo de Recursos Naturales"
-  site-url: fcorubilarrocha@gmail.com
   title: "Francisco J. Rubilar Rocha"
-  navbar: 
+  description: "Ingeniero Civil Ambiental | Magíster en Manejo de Recursos Naturales"
+  site-url: fcorubilarrocha@gmail.com
+  navbar:
+    title: |
+      Francisco J. Rubilar Rocha
+    subtitle: "Ing. Civil Ambiental · Magíster RRNN"
     right:
-      - about.qmd
+      - text: "Sobre mí"
+        href: about.qmd
+      - text: "Artículos"
+        href: index.qmd
+
 format:
   html:
     theme:
       - cosmo
       - brand
     css: styles.css
-
-
-

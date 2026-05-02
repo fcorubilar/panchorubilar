@@ -1,25 +1,67 @@
 ---
-title: "Cartografía interactiva de calidad de agua del Lago Budi"
-subtitle: "17 estaciones, 8 parámetros, contraste con NCh1333"
-description: "Visualizador SIG con mediciones de calidad de agua superficial y de lecho en el Lago Budi, contrastadas con los requisitos de la Norma Chilena NCh1333.Of78 para uso recreativo con contacto directo."
+title: "Repositorio interactivo de la calidad de agua del Lago Budi"
+subtitle: "Proyecto Vigías del Budi - Monitoreo Participativo de la Calidad del Agua"
+description: "Revisa todos los resultados que he levantando en relación a la calidad del agua del Lago Budi. Encontrarás explicaciones sobre las presiones ambientales que le afectan, la forma en que hago mi trabajo y un visualizador SIG con mediciones de calidad de agua superficial y de lecho en el Lago Budi, contrastadas con los requisitos de la Norma Chilena NCh1333. Todo esto, en el contexto del Proyecto ID 27855 financiado por el FNDR 8% Municipalidades 2025, del Gobierno Regional de La Araucanía"
 author: "Francisco Rubilar Rocha"
 date: "2026-05-02"
 date-modified: last-modified
 categories: 
   - SIG
-  - calidad de agua
+  - Calidad de Agua
   - Lago Budi
   - NCh1333
-  - cartografía interactiva
+  - Saavedra
 toc: false
 format:
   html:
     page-layout: article
 ---
 
-## Sobre este visualizador
+## Capitulo I - La eutrofización del Budi Leufu
 
-Esta cartografía interactiva permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra, Región de La Araucanía. La campaña cubrió **17 estaciones de muestreo** distribuidas a lo largo del cuerpo lacustre, con registros tanto en **superficie** como en **lecho**.
+El Lago Budi posee una fuerte influencia marina, proveniente del océano pacífico, generando aguas salobres que brindan condiciones únicas de hábitat a un gran número de especies, especialmente, sitios de anidamiento de avifauna endémica. Alrededor de este cuerpo de agua viven más de 7000 personas mapuche agrupadas en decenas de comunidades indígenas con un fuerte arraigo al territorio. El Budi Leufu, es un sitio prioritario según lo indicado en la ley 19.300, art. 11, letra d, y si bien, esta naturaleza jurídica se encuentra ratificada por el Ord. Nº 100143/2010 del SEA, actualmente no existe ningún instrumento de gestión para la protección y el monitoreo de parámetros sanitarios y ambientales de este único e importante cuerpo de agua.
+
+![*Imagen aérea del Sector de Isla Huapi, obtenida con Dron Phantom 4 Pro durante una de las campañas de monitoreo*](ISLAHUAPI.jpeg)
+
+Durante los últimos 20 años, se ha evidenciado una proliferación anormal de algas y cianobacterias, con un aumento drástico de sedimentos nitrogenados y fosfatados acumulados en el lecho del lago, lo que ha provocado su gradual eutrofización (Beth, 2015). En 2024, la SEREMI de Salud Araucanía declaró riesgo sanitario en Puerto Domínguez debido a la alta concentración de coliformes fecales en las playas de esta localidad.
+
+![*Imagen aérea de un florecimiento anormal de algas en el Sector Playa La Chasquilla (Puerto Domínguez), obtenida con Dron Phantom 4 Pro durante una de las campañas de monitoreo*](LAGO_EUTROFIZADO2.jpeg)
+
+Me permito relevar, que no son solo las poblaciones humanas las afectadas por la eutrofización del Lago. Peces y aves, algunos endémicos de la Cuenca del Lago Budi se han visto afectados seriamente por la contaminación. Se estima que los aportes de los nutrientes que provocan la eutrofización del lago tienen su origen en el exceso de aplicación de fertilizantes sintéticos y la infiltración de aguas servidas debido a la ausencia de alcantarillado y PTAS que atiendan a los habitantes de Puerto Domínguez y el sector rural.
+
+::: {layout-ncol="2"}
+![Evento de varamiento de ictiofauna, Cheirodon pisciculus](POCHAS_VARADAS.jpeg)
+
+![Afectación de hábitat de avifauna, Cisnes de Cuello Negro](LAGO_EUTROFIZADO.jpeg){width="110%"}
+:::
+
+## Capítulo II - Campañas de monitoreo de calidad de agua
+
+La iniciativa que diseñé, contempló la adquisición de equipos profesionales de medición multiparamétrica de la calidad del agua salobre y agua dulce, la compra de reactivos para el manejo y calibración de los equipos multiparamétricos, además de la adquisición de un caudalímetro para el aforo de afluentes superficiales de la cuenca.
+
+::: {layout-ncol="2"}
+![Calibración en terreno de parámetros de Oxígeno Disuelto y pH en sensor HANNA HI98594](FCORUBILAR_CAMIONETA.jpeg)
+
+![Demostración de uso de sensor multiparamétrico al Sr. Gobernador de La Araucanía, Don René Saffirio](GOREyFCORUBILAR.jpeg)
+:::
+
+El plan de monitoreo está siendo ejecutado de forma quincenal, midiendo y muestreando en cada campaña 10 puntos de la cuenca que coincidan con las descargas de los afluentes de mayor caudal al Lago Budi. Sin desmedro de ese protocolo, también se ha recopilado información en los sectores donde ha sucedido varamiento de ictiofauna. 
+
+::: {layout-ncol="2"}
+![Medición multiparamétrica de calidad de agua en el interior del Lago Budi, sector "Punta El Toro"](FCORUBILAR_BOTE.jpeg)
+
+![Medición multiparamétrica de calidad de agua en la ribera del Lago Budi, sector "Romopulli"](FCORUBILAR_LAGO2.jpeg)
+:::
+
+El proyecto contempló levantar un programa de formación en calidad de agua mediante un llamado abierto a la comunidad. A la fecha se han intervenido 2 escuelas rurales y a la **Mesa Territorial de Pueblo Originarios**, a quienes se les ha capacitado para apoyar el programa de medición de parámetros y muestreo del agua a nivel territorial.
+
+![*Taller de calidad de agua para niños de Escuela Rural Sol Naciente de Romopulli. Posterior al taller se dejaron 4 Checkers Digitales para su uso permanente por parte de la Escuela*](CLASES_AGUA.jpeg)
+
+## Capítulo III - Cartografía interactiva de calidad de agua del Lago Budi
+
+Uno de los resultados generados fue una cartografía interactiva que permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra. La campaña cubrió **17 estaciones de muestreo** distribuidas a lo largo del cuerpo lacustre, con registros tanto en **superficie** como en **lecho**.
+
+![*Fotografía preparando el sensor multiparamétrico y envases de muestras sobre la lancha en medio del Lago Budi, altura de Isla Nahuelhuapi*](FCORUBILAR_BN.jpeg)
 
 Para cada punto se midieron ocho parámetros mediante sensor multiparamétrico in situ: pH, oxígeno disuelto (mg/L y porcentaje de saturación), turbiedad (FNU), temperatura, potencial de oxidación-reducción (ORP), conductividad eléctrica, sólidos disueltos totales (TDS) y salinidad (PSU).
 
@@ -39,15 +81,10 @@ Al hacer clic sobre cualquier estación se despliega un popup con todos los par�
 
 ## Visualizador
 
-::: {.column-screen-inset}
+::: column-screen-inset
+<iframe src="webmap.html" width="100%" height="800px" style="border: 1px solid #2a3b5a; border-radius: 8px;" title="SIG Lago Budi - Cartografía de calidad de agua">
 
-<iframe src="webmap.html" 
-        width="100%" 
-        height="800px" 
-        style="border: 1px solid #2a3b5a; border-radius: 8px;"
-        title="SIG Lago Budi - Cartografía de calidad de agua">
 </iframe>
-
 :::
 
 [Abrir el visualizador en pestaña completa →](webmap.html){.btn .btn-primary target="_blank"}
@@ -62,8 +99,10 @@ Al hacer clic sobre cualquier estación se despliega un popup con todos los par�
 
 **Sobre las limitaciones**: una campaña puntual de un día entrega una fotografía instantánea del estado del cuerpo de agua. Para conclusiones robustas sobre el comportamiento del lago es necesario monitoreo continuo o al menos campañas estacionales repetidas. Este visualizador documenta una jornada específica y debe leerse como tal.
 
+![*Fotografía de monitoreo nocturno en sector "Romopulli"*](FCORUBILAR_NOCHE.jpeg)
+
 ## Datos y reproducibilidad
 
-Las coordenadas de las estaciones están en sistema **WGS84 (EPSG:4326)**. La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).
+Las coordenadas de las estaciones están en sistema **WGS84 (EPSG:32718)**. La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).
 
-Si trabajas en gestión de cuerpos de agua y te interesa replicar este enfoque metodológico en otra cuenca, puedes escribirme a [fcorubilarrocha@gmail.com](mailto:fcorubilarrocha@gmail.com).
+Si trabajas en gestión de cuerpos de agua y te interesa replicar este enfoque metodológico en otra cuenca, puedes escribirme a [fcorubilarrocha\@gmail.com](mailto:fcorubilarrocha@gmail.com).

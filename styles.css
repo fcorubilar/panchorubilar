@@ -1,1 +1,14 @@
 /* css styles */
+.navbar-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.navbar-title::after {
+  content: "Ing. Civil Ambiental · Magíster en Manejo de RRNN";
+  font-size: 0.6rem;
+  font-weight: 400;
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+}

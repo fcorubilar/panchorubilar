@@ -1,5 +1,5 @@
 ---
-title: "Textos de su interés:"
+title: "Revisa mis desarrollos y resultados:"
 listing:
   contents: posts
   feed: true

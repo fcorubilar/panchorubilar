@@ -19,39 +19,39 @@ about:
 
 ## Hola, soy Francisco
 
-Ingeniero Civil Ambiental y Magíster en Manejo de Recursos Naturales, formado en la Universidad de La Frontera. Trabajo desde **Saavedra, La Araucanía**, en la intersección entre técnica ambiental rigurosa y territorios rurales.
+Ingeniero Civil Ambiental y Magíster en Manejo de Recursos Naturales, formado en la Universidad de La Frontera. Trabajo desde **Saavedra, La Araucanía**.
 
-Llevo más de diez años haciendo gestión ambiental en Chile: calidad de aire, sistemas de información geográfica, gestión de residuos, huella de carbono y participación comunitaria en conflictos socioambientales. He trabajado para municipios, gobiernos regionales, ministerios, fundaciones y universidades. Hoy soy Encargado de Medioambiente de la Municipalidad de Saavedra.
+Llevo más de diez años implementando gestión ambiental en Chile, desempeñándome en calidad de aire, sistemas de información geográfica, gestión de residuos, huella de carbono y participación comunitaria en conflictos socioambientales. He trabajado para municipios, gobiernos regionales, ministerios, fundaciones y universidades. Hoy soy Encargado de Medioambiente de la Municipalidad de Saavedra.
 
 ## Lo que hago
 
-Cuando alguien me pregunta a qué me dedico exactamente, respondo así: **ayudo a que las decisiones ambientales se tomen con datos, no con intuiciones**. Eso pasa por levantar líneas base con drones y SIG, modelar dispersión de contaminantes atmosféricos, calcular huellas de carbono institucionales, diseñar talleres de participación ciudadana que efectivamente escuchen al territorio, y postular proyectos a fondos públicos para que se ejecuten cosas concretas.
+Cuando alguien me pregunta a qué me dedico exactamente, respondo que **ayudo a que las decisiones ambientales y productivas se tomen con datos, no con intuiciones**. Ello implica levantar y dirigir líneas base, la aplicación de sensores remotos y SIG, la modelación de contaminantes, el análisis de ciclo de vida de productos y servicios, el diseño y ejecución de talleres de participación ciudadana con sensibilidad socioambiental, y la elaboración de proyectos que se ejecuten cosas concretas.
 
 A lo largo de mi trayectoria he liderado o participado en proyectos que han movilizado **más de $203 millones de pesos** en financiamiento público y privado para iniciativas ambientales en La Araucanía y otras regiones del país.
 
 ## Áreas de especialidad
 
-- **Calidad de aire y modelación atmosférica.** Diplomado de la Universidad de Santiago. Monitoreo móvil de material particulado en diversas comunas.
-- **Análisis de Ciclo de Vida y Huella de Carbono.** Diplomado de la Universidad Andrés Bello. Proyecto Climat AmSud sobre huella de carbono hospitalaria.
+- **Calidad de aire y modelación atmosférica.** Diplomado de la Universidad de Santiago de Chile. Monitoreo móvil de material particulado en diversas comunas; fundación de la Red Comunitaria de Calidad de Aire - Respiracción.
+- **Análisis de Ciclo de Vida y Huella de Carbono.** Diplomado de la Universidad Andrés Bello. Proyecto Climat AmSud sobre Huella de Carbono Hospitalaria; Medición y reporte de emisiones en Huella Chile.
 - **Sistemas de Información Geográfica.** ArcGIS, QGIS y R aplicados a diagnóstico ambiental territorial.
-- **Drones y sensores remotos.** Diplomado UFRO. Phantom 4 Pro como herramienta de campo.
+- **Drones y sensores remotos.** Diplomado en Universidad de La Fronteera.Uso de Phantom 4 Pro como herramienta de campo; uso de equipamiento de medición multiparamétrica para calidad de agua.
 - **Gestión de residuos sólidos.** Evaluador acreditado de ChileValora para perfiles de servicios de gestión de residuos. He evaluado a más de 250 recicladores en 17 ciudades de Chile.
-- **Participación ciudadana ambiental.** Más de 4.000 encuestas territoriales aplicadas en La Araucanía y experiencia directa en programas PRAS (Quintero-Puchuncaví, Huasco, Coronel).
-- **Educación ambiental y docencia universitaria.** Ramos de pregrado y postgrado en UFRO, Universidad de Los Lagos y Universidad Católica de Temuco.
+- **Participación ciudadana ambiental.** Más de 4.000 encuestas territoriales aplicadas en La Araucanía y experiencia directa en programas PRAS (Quintero-Puchuncaví, Huasco, Coronel). Mediación institucional en conflictos socioambientales.
+- **Educación ambiental y docencia universitaria.** Docente de asignaturas de pregrado y postgrado en Universidad de La Frontera, Universidad de Los Lagos y Universidad Católica de Temuco.
 
 ## Algunas cosas en las que he trabajado
 
 - **Política de Sustentabilidad UFRO** (2022–2024). Operativización del Acuerdo de Producción Limpia institucional, medición de huella de carbono, líneas base de biodiversidad. Representante institucional ante la Red de Campus Sustentable.
 - **PRAS Quintero-Puchuncaví, Huasco y Coronel** (2019–2022). Diseño y relatoría de jornadas sobre calidad de aire, gestión de residuos, cambio climático y gobernanza ambiental.
 - **Estudio regional de PTAS y vertederos** (2017–2018). Talleres territoriales en 80 instalaciones de las 32 comunas de La Araucanía.
-- **Caracterización de residuos sólidos** según NCh3321:2013 en Temuco, Cunco y Gorbea.
+- **Caracterización de residuos sólidos** según NCh3321:2013 en Temuco, Cunco, Gorbea y Saavedra.
 - **Investigación en huella de carbono hospitalaria** del Hospital Hernán Henríquez Aravena de Temuco, con publicación reciente en *Journal of Cardiothoracic and Vascular Anesthesia* (2025).
 
 ## Por qué este blog
 
 Decidí abrir este espacio porque hay un cuerpo importante de conocimiento aplicado que se queda en informes técnicos y nunca llega a quien podría usarlo: otros encargados municipales, profesionales que postulan a fondos públicos, comunidades que enfrentan conflictos ambientales, estudiantes que arman su tesis. Aquí escribo sobre lo que aprendo en terreno, con datos reales y sin jerga innecesaria.
 
-Si trabajas en gestión ambiental municipal, te interesa la calidad de aire en Chile, o estás buscando referencias prácticas para postular proyectos al FPA, FNDR, SCAM u otros fondos, probablemente algo de lo que publico te sirva.
+Si trabajas en gestión ambiental municipal, te interesa la calidad de aire en Chile, o estás buscando referencias prácticas para postular proyectos a fondos públicos y privados, probablemente algo de lo que publico acá te sirva.
 
 ## Conversemos
 
