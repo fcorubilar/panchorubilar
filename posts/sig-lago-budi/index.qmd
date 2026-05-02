@@ -1,0 +1,69 @@
+---
+title: "Cartografía interactiva de calidad de agua del Lago Budi"
+subtitle: "17 estaciones, 8 parámetros, contraste con NCh1333"
+description: "Visualizador SIG con mediciones de calidad de agua superficial y de lecho en el Lago Budi, contrastadas con los requisitos de la Norma Chilena NCh1333.Of78 para uso recreativo con contacto directo."
+author: "Francisco Rubilar Rocha"
+date: "2026-05-02"
+date-modified: last-modified
+categories: 
+  - SIG
+  - calidad de agua
+  - Lago Budi
+  - NCh1333
+  - cartografía interactiva
+toc: false
+format:
+  html:
+    page-layout: full
+---
+
+## Sobre este visualizador
+
+Esta cartografía interactiva permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra, Región de La Araucanía. La campaña cubrió **17 estaciones de muestreo** distribuidas a lo largo del cuerpo lacustre, con registros tanto en **superficie** como en **lecho**.
+
+Para cada punto se midieron ocho parámetros mediante sensor multiparamétrico in situ: pH, oxígeno disuelto (mg/L y porcentaje de saturación), turbiedad (FNU), temperatura, potencial de oxidación-reducción (ORP), conductividad eléctrica, sólidos disueltos totales (TDS) y salinidad (PSU).
+
+Los resultados se contrastan con los requisitos de la **Norma Chilena NCh1333.Of78 (modificada en 1987)**, en particular el Artículo 7.2.1, Tabla 3, correspondiente a aguas destinadas a recreación con contacto directo (natación, buceo, esquí acuático).
+
+## Cómo usar el visualizador
+
+En el panel lateral puedes:
+
+- Seleccionar el **parámetro** a cartografiar.
+- Cambiar entre vista de **superficie** y **lecho**.
+- Cambiar el **mapa base** (calles, satélite, topográfico).
+- Ver la **leyenda NCh1333** correspondiente al parámetro seleccionado, con bandas de cumplimiento.
+- Consultar **estadísticos descriptivos** (mínimo, máximo, promedio) calculados sobre todas las estaciones.
+
+Al hacer clic sobre cualquier estación se despliega un popup con todos los parámetros medidos en ese punto y su clasificación según la norma.
+
+## Visualizador
+
+::: {.column-screen-inset}
+
+<iframe src="webmap.html" 
+        width="100%" 
+        height="800px" 
+        style="border: 1px solid #2a3b5a; border-radius: 8px;"
+        title="SIG Lago Budi - Cartografía de calidad de agua">
+</iframe>
+
+:::
+
+[Abrir el visualizador en pestaña completa →](webmap.html){.btn .btn-primary target="_blank"}
+
+## Notas metodológicas
+
+**Sobre el equipo de medición**: las mediciones se realizaron con sensor multiparamétrico Hanna HI98594, calibrado previo a la jornada de campo. La precisión nominal de cada parámetro está dentro de los rangos aceptados para monitoreo ambiental de cuerpos de agua superficiales.
+
+**Sobre el contexto del Lago Budi**: el Budi es una cuenca costera **mixohalina** —cuerpo de agua semi-cerrado con conexión periódica al océano— ubicado en territorio mapuche-lafkenche. Los valores de salinidad varían fuertemente entre sectores conectados al mar y sectores con aporte exclusivo de tributarios dulces. Esta heterogeneidad debe considerarse al interpretar los gradientes espaciales.
+
+**Sobre la NCh1333**: la norma referida regula los requisitos de calidad de agua para distintos usos (consumo humano, riego, recreación, vida acuática). En este visualizador se aplica específicamente la tabla de uso recreativo con contacto directo. Para otros usos (riego, vida acuática), las bandas de cumplimiento son distintas.
+
+**Sobre las limitaciones**: una campaña puntual de un día entrega una fotografía instantánea del estado del cuerpo de agua. Para conclusiones robustas sobre el comportamiento del lago es necesario monitoreo continuo o al menos campañas estacionales repetidas. Este visualizador documenta una jornada específica y debe leerse como tal.
+
+## Datos y reproducibilidad
+
+Las coordenadas de las estaciones están en sistema **WGS84 (EPSG:4326)**. La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).
+
+Si trabajas en gestión de cuerpos de agua y te interesa replicar este enfoque metodológico en otra cuenca, puedes escribirme a [fcorubilarrocha@gmail.com](mailto:fcorubilarrocha@gmail.com).

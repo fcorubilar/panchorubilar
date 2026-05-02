@@ -2,7 +2,7 @@
 title: "Sobre mí"
 image: perfil.jpg
 about:
-  template: solana
+  template: trestles
   image-shape: round
   image-width: 14em
   links:

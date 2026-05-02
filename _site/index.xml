@@ -10,7 +10,67 @@
 <atom:link href="fcorubilarrocha@gmail.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Ingeniero Civil Ambiental  |  Magíster en Manejo de Recursos Naturales</description>
 <generator>quarto-1.9.37</generator>
-<lastBuildDate>Fri, 30 Jan 2026 03:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sat, 02 May 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Cartografía interactiva de calidad de agua del Lago Budi</title>
+  <dc:creator>Francisco Rubilar Rocha</dc:creator>
+  <link>fcorubilarrocha@gmail.com/posts/sig-lago-budi/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="sobre-este-visualizador" class="level2">
+<h2 class="anchored" data-anchor-id="sobre-este-visualizador">Sobre este visualizador</h2>
+<p>Esta cartografía interactiva permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra, Región de La Araucanía. La campaña cubrió <strong>17 estaciones de muestreo</strong> distribuidas a lo largo del cuerpo lacustre, con registros tanto en <strong>superficie</strong> como en <strong>lecho</strong>.</p>
+<p>Para cada punto se midieron ocho parámetros mediante sensor multiparamétrico in situ: pH, oxígeno disuelto (mg/L y porcentaje de saturación), turbiedad (FNU), temperatura, potencial de oxidación-reducción (ORP), conductividad eléctrica, sólidos disueltos totales (TDS) y salinidad (PSU).</p>
+<p>Los resultados se contrastan con los requisitos de la <strong>Norma Chilena NCh1333.Of78 (modificada en 1987)</strong>, en particular el Artículo 7.2.1, Tabla 3, correspondiente a aguas destinadas a recreación con contacto directo (natación, buceo, esquí acuático).</p>
+</section>
+<section id="cómo-usar-el-visualizador" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-usar-el-visualizador">Cómo usar el visualizador</h2>
+<p>En el panel lateral puedes:</p>
+<ul>
+<li>Seleccionar el <strong>parámetro</strong> a cartografiar.</li>
+<li>Cambiar entre vista de <strong>superficie</strong> y <strong>lecho</strong>.</li>
+<li>Cambiar el <strong>mapa base</strong> (calles, satélite, topográfico).</li>
+<li>Ver la <strong>leyenda NCh1333</strong> correspondiente al parámetro seleccionado, con bandas de cumplimiento.</li>
+<li>Consultar <strong>estadísticos descriptivos</strong> (mínimo, máximo, promedio) calculados sobre todas las estaciones.</li>
+</ul>
+<p>Al hacer clic sobre cualquier estación se despliega un popup con todos los parámetros medidos en ese punto y su clasificación según la norma.</p>
+</section>
+<section id="visualizador" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="visualizador">Visualizador</h2>
+<div class="column-screen-inset">
+<iframe src="webmap.html" width="100%" height="800px" style="border: 1px solid #2a3b5a; border-radius: 8px;" title="SIG Lago Budi - Cartografía de calidad de agua">
+</iframe>
+</div>
+<p><a href="webmap.html" class="btn btn-primary" target="_blank">Abrir el visualizador en pestaña completa →</a></p>
+</section>
+<section id="notas-metodológicas" class="level2">
+<h2 class="anchored" data-anchor-id="notas-metodológicas">Notas metodológicas</h2>
+<p><strong>Sobre el equipo de medición</strong>: las mediciones se realizaron con sensor multiparamétrico Hanna HI98594, calibrado previo a la jornada de campo. La precisión nominal de cada parámetro está dentro de los rangos aceptados para monitoreo ambiental de cuerpos de agua superficiales.</p>
+<p><strong>Sobre el contexto del Lago Budi</strong>: el Budi es una cuenca costera <strong>mixohalina</strong> —cuerpo de agua semi-cerrado con conexión periódica al océano— ubicado en territorio mapuche-lafkenche. Los valores de salinidad varían fuertemente entre sectores conectados al mar y sectores con aporte exclusivo de tributarios dulces. Esta heterogeneidad debe considerarse al interpretar los gradientes espaciales.</p>
+<p><strong>Sobre la NCh1333</strong>: la norma referida regula los requisitos de calidad de agua para distintos usos (consumo humano, riego, recreación, vida acuática). En este visualizador se aplica específicamente la tabla de uso recreativo con contacto directo. Para otros usos (riego, vida acuática), las bandas de cumplimiento son distintas.</p>
+<p><strong>Sobre las limitaciones</strong>: una campaña puntual de un día entrega una fotografía instantánea del estado del cuerpo de agua. Para conclusiones robustas sobre el comportamiento del lago es necesario monitoreo continuo o al menos campañas estacionales repetidas. Este visualizador documenta una jornada específica y debe leerse como tal.</p>
+</section>
+<section id="datos-y-reproducibilidad" class="level2">
+<h2 class="anchored" data-anchor-id="datos-y-reproducibilidad">Datos y reproducibilidad</h2>
+<p>Las coordenadas de las estaciones están en sistema <strong>WGS84 (EPSG:4326)</strong>. La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).</p>
+<p>Si trabajas en gestión de cuerpos de agua y te interesa replicar este enfoque metodológico en otra cuenca, puedes escribirme a <a href="mailto:fcorubilarrocha@gmail.com">fcorubilarrocha@gmail.com</a>.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>SIG</category>
+  <category>calidad de agua</category>
+  <category>Lago Budi</category>
+  <category>NCh1333</category>
+  <category>cartografía interactiva</category>
+  <guid>fcorubilarrocha@gmail.com/posts/sig-lago-budi/</guid>
+  <pubDate>Sat, 02 May 2026 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Diagnóstico ambiental rural con dron Phantom 4 Pro</title>
   <dc:creator>Francisco Rubilar Rocha</dc:creator>

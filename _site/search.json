@@ -1,17 +1,52 @@
 [
   {
-    "objectID": "posts/drones/index.html",
-    "href": "posts/drones/index.html",
-    "title": "Diagnóstico ambiental rural con dron Phantom 4 Pro",
+    "objectID": "posts/sig-lago-budi/index.html",
+    "href": "posts/sig-lago-budi/index.html",
+    "title": "Cartografía interactiva de calidad de agua del Lago Budi",
     "section": "",
-    "text": "Aquí escribes el cuerpo del artículo en markdown normal."
+    "text": "Esta cartografía interactiva permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra, Región de La Araucanía. La campaña cubrió 17 estaciones de muestreo distribuidas a lo largo del cuerpo lacustre, con registros tanto en superficie como en lecho.\nPara cada punto se midieron ocho parámetros mediante sensor multiparamétrico in situ: pH, oxígeno disuelto (mg/L y porcentaje de saturación), turbiedad (FNU), temperatura, potencial de oxidación-reducción (ORP), conductividad eléctrica, sólidos disueltos totales (TDS) y salinidad (PSU).\nLos resultados se contrastan con los requisitos de la Norma Chilena NCh1333.Of78 (modificada en 1987), en particular el Artículo 7.2.1, Tabla 3, correspondiente a aguas destinadas a recreación con contacto directo (natación, buceo, esquí acuático)."
   },
   {
-    "objectID": "posts/drones/index.html#subtítulos-así",
-    "href": "posts/drones/index.html#subtítulos-así",
-    "title": "Diagnóstico ambiental rural con dron Phantom 4 Pro",
-    "section": "Subtítulos así",
-    "text": "Subtítulos así\nTexto, negritas, cursivas, enlaces.\n\n\n\nCaption de imagen"
+    "objectID": "posts/sig-lago-budi/index.html#sobre-este-visualizador",
+    "href": "posts/sig-lago-budi/index.html#sobre-este-visualizador",
+    "title": "Cartografía interactiva de calidad de agua del Lago Budi",
+    "section": "",
+    "text": "Esta cartografía interactiva permite explorar mediciones de calidad de agua tomadas en el Lago Budi, comuna de Saavedra, Región de La Araucanía. La campaña cubrió 17 estaciones de muestreo distribuidas a lo largo del cuerpo lacustre, con registros tanto en superficie como en lecho.\nPara cada punto se midieron ocho parámetros mediante sensor multiparamétrico in situ: pH, oxígeno disuelto (mg/L y porcentaje de saturación), turbiedad (FNU), temperatura, potencial de oxidación-reducción (ORP), conductividad eléctrica, sólidos disueltos totales (TDS) y salinidad (PSU).\nLos resultados se contrastan con los requisitos de la Norma Chilena NCh1333.Of78 (modificada en 1987), en particular el Artículo 7.2.1, Tabla 3, correspondiente a aguas destinadas a recreación con contacto directo (natación, buceo, esquí acuático)."
+  },
+  {
+    "objectID": "posts/sig-lago-budi/index.html#cómo-usar-el-visualizador",
+    "href": "posts/sig-lago-budi/index.html#cómo-usar-el-visualizador",
+    "title": "Cartografía interactiva de calidad de agua del Lago Budi",
+    "section": "Cómo usar el visualizador",
+    "text": "Cómo usar el visualizador\nEn el panel lateral puedes:\n\nSeleccionar el parámetro a cartografiar.\nCambiar entre vista de superficie y lecho.\nCambiar el mapa base (calles, satélite, topográfico).\nVer la leyenda NCh1333 correspondiente al parámetro seleccionado, con bandas de cumplimiento.\nConsultar estadísticos descriptivos (mínimo, máximo, promedio) calculados sobre todas las estaciones.\n\nAl hacer clic sobre cualquier estación se despliega un popup con todos los parámetros medidos en ese punto y su clasificación según la norma."
+  },
+  {
+    "objectID": "posts/sig-lago-budi/index.html#visualizador",
+    "href": "posts/sig-lago-budi/index.html#visualizador",
+    "title": "Cartografía interactiva de calidad de agua del Lago Budi",
+    "section": "Visualizador",
+    "text": "Visualizador\n\n\n\n\nAbrir el visualizador en pestaña completa →"
+  },
+  {
+    "objectID": "posts/sig-lago-budi/index.html#notas-metodológicas",
+    "href": "posts/sig-lago-budi/index.html#notas-metodológicas",
+    "title": "Cartografía interactiva de calidad de agua del Lago Budi",
+    "section": "Notas metodológicas",
+    "text": "Notas metodológicas\nSobre el equipo de medición: las mediciones se realizaron con sensor multiparamétrico Hanna HI98594, calibrado previo a la jornada de campo. La precisión nominal de cada parámetro está dentro de los rangos aceptados para monitoreo ambiental de cuerpos de agua superficiales.\nSobre el contexto del Lago Budi: el Budi es una cuenca costera mixohalina —cuerpo de agua semi-cerrado con conexión periódica al océano— ubicado en territorio mapuche-lafkenche. Los valores de salinidad varían fuertemente entre sectores conectados al mar y sectores con aporte exclusivo de tributarios dulces. Esta heterogeneidad debe considerarse al interpretar los gradientes espaciales.\nSobre la NCh1333: la norma referida regula los requisitos de calidad de agua para distintos usos (consumo humano, riego, recreación, vida acuática). En este visualizador se aplica específicamente la tabla de uso recreativo con contacto directo. Para otros usos (riego, vida acuática), las bandas de cumplimiento son distintas.\nSobre las limitaciones: una campaña puntual de un día entrega una fotografía instantánea del estado del cuerpo de agua. Para conclusiones robustas sobre el comportamiento del lago es necesario monitoreo continuo o al menos campañas estacionales repetidas. Este visualizador documenta una jornada específica y debe leerse como tal."
+  },
+  {
+    "objectID": "posts/sig-lago-budi/index.html#datos-y-reproducibilidad",
+    "href": "posts/sig-lago-budi/index.html#datos-y-reproducibilidad",
+    "title": "Cartografía interactiva de calidad de agua del Lago Budi",
+    "section": "Datos y reproducibilidad",
+    "text": "Datos y reproducibilidad\nLas coordenadas de las estaciones están en sistema WGS84 (EPSG:4326). La geometría espacial fue capturada con GPS de mano, con precisión submétrica para fines cartográficos (no topográficos).\nSi trabajas en gestión de cuerpos de agua y te interesa replicar este enfoque metodológico en otra cuenca, puedes escribirme a fcorubilarrocha@gmail.com."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "panchorubilar",
+    "section": "",
+    "text": "Cartografía interactiva de calidad de agua del Lago Budi\n\n\n17 estaciones, 8 parámetros, contraste con NCh1333\n\n\n\nSIG\n\ncalidad de agua\n\nLago Budi\n\nNCh1333\n\ncartografía interactiva\n\n\n\nVisualizador SIG con mediciones de calidad de agua superficial y de lecho en el Lago Budi, contrastadas con los requisitos de la Norma Chilena NCh1333.Of78 para uso recreativo con contacto directo.\n\n\n\n\n\nMay 2, 2026\n\n\nFrancisco Rubilar Rocha\n\n\n\n\n\n\n\n\n\n\n\n\nDiagnóstico ambiental rural con dron Phantom 4 Pro\n\n\nQué se puede y qué no en municipios de menos de 20 mil habitantes\n\n\n\ndrones\n\ngestión municipal\n\nLa Araucanía\n\n\n\n\n\n\n\n\n\nJan 30, 2026\n\n\nFrancisco Rubilar Rocha\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -63,10 +98,17 @@
     "text": "Conversemos\nEstoy disponible para colaboraciones, charlas, asesorías técnicas y consultas profesionales. La forma más rápida de contactarme es por correo: fcorubilarrocha@gmail.com."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "panchorubilar",
+    "objectID": "posts/drones/index.html",
+    "href": "posts/drones/index.html",
+    "title": "Diagnóstico ambiental rural con dron Phantom 4 Pro",
     "section": "",
-    "text": "Diagnóstico ambiental rural con dron Phantom 4 Pro\n\n\nQué se puede y qué no en municipios de menos de 20 mil habitantes\n\n\n\ndrones\n\ngestión municipal\n\nLa Araucanía\n\n\n\n\n\n\n\n\n\nJan 30, 2026\n\n\nFrancisco Rubilar Rocha\n\n\n\n\n\nNo matching items"
+    "text": "Aquí escribes el cuerpo del artículo en markdown normal."
+  },
+  {
+    "objectID": "posts/drones/index.html#subtítulos-así",
+    "href": "posts/drones/index.html#subtítulos-así",
+    "title": "Diagnóstico ambiental rural con dron Phantom 4 Pro",
+    "section": "Subtítulos así",
+    "text": "Subtítulos así\nTexto, negritas, cursivas, enlaces.\n\n\n\nCaption de imagen"
   }
 ]

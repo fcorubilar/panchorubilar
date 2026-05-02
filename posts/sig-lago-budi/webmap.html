@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIG Lago Budi — Cartografía NCh1333</title>
+
+<!-- Leaflet CSS con múltiples CDN fallback -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+      onerror="this.onerror=null;this.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';"/>
+
+<style>
+:root{
+  --bg:#0b1220; --surface:#111927; --card:#18243a; --panel:#1e2a42;
+  --border:#2a3b5a; --accent:#38bdf8; --green:#22c55e; --amber:#f59e0b;
+  --red:#ef4444; --purple:#a78bfa; --text:#e2e8f0; --muted:#64748b;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{
+  background:var(--bg); color:var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size:13px; line-height:1.5;
+}
+
+header{
+  background:linear-gradient(135deg,#060e1c,#0d1e38 55%,#0b1a30);
+  padding:14px 22px; border-bottom:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center; gap:20px;
+  flex-shrink:0;
+}
+.h-title{display:flex;align-items:center;gap:14px;}
+.h-logo{font-size:22px;background:linear-gradient(135deg,var(--accent),var(--purple));
+  width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
+h1{font-size:1.1rem;font-weight:700;color:#f1f5f9;margin-bottom:2px;}
+.h-sub{font-size:11px;color:var(--muted);}
+.h-meta{display:flex;gap:14px;font-size:10px;color:var(--muted);}
+.h-meta span{display:flex;align-items:center;gap:5px;}
+
+.app{display:grid;grid-template-columns:320px 1fr;height:calc(100vh - 68px);}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:18px 18px 40px;}
+.sb-section{margin-bottom:20px;}
+.sb-label{font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600;}
+
+.sel{width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);
+  padding:9px 12px;border-radius:7px;font-size:13px;font-family:inherit;cursor:pointer;}
+.sel:hover,.sel:focus{border-color:var(--accent);outline:none;}
+.sel option{background:var(--card);color:var(--text);}
+
+.toggle-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.toggle-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);
+  padding:10px 12px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;
+  font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:3px;transition:all .15s;}
+.toggle-btn:hover{color:var(--text);border-color:#3a4d75;}
+.toggle-btn.active{background:rgba(56,189,248,.1);border-color:var(--accent);color:var(--accent);}
+.toggle-btn .tb-icon{font-size:16px;}
+.toggle-btn .tb-sub{font-size:8.5px;color:var(--muted);letter-spacing:.05em;}
+
+.basemap-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.basemap-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);
+  padding:8px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;
+  font-family:inherit;text-align:center;transition:all .15s;}
+.basemap-btn:hover{color:var(--text);border-color:#3a4d75;}
+.basemap-btn.active{background:rgba(167,139,250,.1);border-color:var(--purple);color:var(--purple);}
+
+.param-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.pc-title{font-size:12px;font-weight:700;color:#f1f5f9;margin-bottom:3px;}
+.pc-norm{font-size:11px;color:var(--muted);margin-bottom:10px;}
+.pc-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:8px;}
+.pc-stat{background:rgba(255,255,255,.02);border-radius:5px;padding:6px 8px;text-align:center;}
+.pc-stat .v{font-size:13px;font-weight:700;}
+.pc-stat .l{font-size:9px;color:var(--muted);letter-spacing:.04em;}
+
+.legend{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.leg-title{font-size:10.5px;font-weight:700;color:#f1f5f9;margin-bottom:8px;}
+.leg-band{display:flex;gap:4px;margin-top:4px;font-size:10px;}
+.leg-band-item{flex:1;padding:4px 6px;border-radius:4px;text-align:center;font-weight:600;font-size:9.5px;}
+.lbi-ok{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3);}
+.lbi-warn{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.lbi-fail{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3);}
+.size-info{font-size:10px;color:var(--muted);margin-top:8px;font-style:italic;}
+
+.stats-bar{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.sb-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;
+  border-bottom:1px dashed rgba(255,255,255,.05);font-size:11px;}
+.sb-row:last-child{border-bottom:none;}
+.sb-row .lbl{color:var(--muted);}
+.sb-row .val{font-weight:600;}
+
+.bottom-legend{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.bl-toggle{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text);cursor:pointer;padding:3px 0;}
+.bl-toggle input{cursor:pointer;}
+
+.map-wrap{position:relative;}
+#map{width:100%;height:100%;background:#0a0f1a;}
+
+.map-info{position:absolute;top:16px;right:16px;z-index:500;
+  background:rgba(17,25,39,.92);border:1px solid var(--border);
+  border-radius:8px;padding:10px 14px;font-size:11px;backdrop-filter:blur(10px);
+  box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none;}
+.mi-row{display:flex;justify-content:space-between;gap:14px;padding:2px 0;}
+.mi-row .l{color:var(--muted);font-size:10px;}
+.mi-row .v{font-weight:600;}
+
+/* Leaflet personalizado */
+.leaflet-container{background:#0a0f1a !important;font-family:inherit !important;}
+.leaflet-control-attribution{background:rgba(17,25,39,.85) !important;color:var(--muted) !important;
+  font-size:9px !important;border-radius:4px;padding:2px 6px;}
+.leaflet-control-attribution a{color:var(--accent) !important;}
+.leaflet-control-zoom a{background:#18243a !important;color:#e2e8f0 !important;
+  border:1px solid var(--border) !important;font-size:16px !important;font-weight:bold !important;}
+.leaflet-control-zoom a:hover{background:#1e2a42 !important;border-color:var(--accent) !important;color:var(--accent) !important;}
+.leaflet-bar{box-shadow:0 4px 16px rgba(0,0,0,.4) !important;}
+
+/* Popup */
+.leaflet-popup-content-wrapper{background:#1a2540 !important;color:#e2e8f0 !important;
+  border:1px solid var(--border) !important;border-radius:8px !important;
+  box-shadow:0 8px 30px rgba(0,0,0,.4) !important;}
+.leaflet-popup-tip{background:#1a2540 !important;border:1px solid var(--border) !important;}
+.leaflet-popup-content{margin:14px 16px !important;font-size:12px !important;min-width:220px;}
+.leaflet-popup-close-button{color:#64748b !important;font-size:18px !important;padding:6px 8px 0 0 !important;}
+.leaflet-popup-close-button:hover{color:#fff !important;}
+.popup-title{font-weight:700;font-size:13px;color:#f1f5f9;margin-bottom:3px;}
+.popup-meta{font-size:10px;color:var(--muted);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.popup-highlighted{background:rgba(56,189,248,.1);border-left:3px solid var(--accent);
+  padding:6px 10px;margin:8px 0;border-radius:4px;}
+.popup-hlabel{font-size:9.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.popup-hvalue{font-size:18px;font-weight:700;line-height:1.2;}
+.popup-params{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;font-size:11px;margin-top:6px;}
+.popup-params .pp-row{display:flex;justify-content:space-between;padding:2px 0;}
+.popup-params .pp-lbl{color:var(--muted);font-size:9.5px;}
+.popup-coords{font-size:9.5px;color:var(--muted);margin-top:8px;padding-top:6px;border-top:1px solid var(--border);
+  font-family:ui-monospace,monospace;}
+
+/* Etiquetas sobre el mapa */
+.leaflet-label{background:rgba(0,0,0,.7);color:#fff;padding:2px 6px;border-radius:3px;
+  font-size:10px;font-weight:700;border:1px solid;white-space:nowrap;
+  text-shadow:0 0 2px rgba(0,0,0,.9);}
+.leaflet-station-label{background:rgba(11,18,32,.85);color:#94a3b8;padding:2px 7px;
+  border-radius:3px;font-size:9.5px;border:1px solid var(--border);
+  white-space:nowrap;box-shadow:0 2px 4px rgba(0,0,0,.3);}
+
+/* Loading overlay mientras Leaflet carga */
+.loading-overlay{position:absolute;inset:0;background:rgba(11,18,32,.95);z-index:1000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--muted);font-size:14px;}
+.loading-spinner{width:40px;height:40px;border:3px solid var(--border);
+  border-top-color:var(--accent);border-radius:50%;
+  animation:spin 0.9s linear infinite;margin-bottom:14px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-fail{color:var(--red);text-align:center;max-width:400px;line-height:1.5;padding:0 20px;}
+
+.sidebar::-webkit-scrollbar{width:6px;}
+.sidebar::-webkit-scrollbar-track{background:var(--bg);}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+
+@media(max-width:900px){
+  .app{grid-template-columns:1fr;grid-template-rows:auto 1fr;}
+  .sidebar{max-height:35vh;}
+  header{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-title">
+    <div class="h-logo">🗺️</div>
+    <div>
+      <h1>SIG Lago Budi — Cartografía de parámetros NCh1333</h1>
+      <div class="h-sub">Visor geoespacial interactivo · 74 mediciones · 16 estaciones · 23 marzo 2026</div>
+    </div>
+  </div>
+  <div class="h-meta">
+    <span>📍 WGS84 (EPSG:4326)</span>
+    <span>🔬 NCh1333.Of78</span>
+    <span>🌊 Lago Budi · Araucanía</span>
+  </div>
+</header>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-section">
+      <div class="sb-label">① Cota de medición</div>
+      <div class="toggle-grid">
+        <button class="toggle-btn active" id="btn-sup">
+          <span class="tb-icon">🌊</span>
+          <span>Superficie</span>
+          <span class="tb-sub">Art. 7.2.1 T.3</span>
+        </button>
+        <button class="toggle-btn" id="btn-lec">
+          <span class="tb-icon">🪸</span>
+          <span>Lecho</span>
+          <span class="tb-sub">Art. 8.1.1 T.4</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">② Parámetro cartografiado</div>
+      <select class="sel" id="sel-param">
+        <option value="pH">pH</option>
+        <option value="OD" selected>Oxígeno disuelto (mg/L)</option>
+        <option value="pct_OD">Saturación OD (%)</option>
+        <option value="FNU">Turbiedad (FNU)</option>
+        <option value="temp">Temperatura (°C)</option>
+        <option value="ORP">ORP (mV)</option>
+        <option value="cond">Conductividad (µS/cm)</option>
+        <option value="TDS">Sólidos disueltos TDS (mg/L)</option>
+        <option value="PSU">Salinidad (PSU)</option>
+      </select>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">③ Mapa base</div>
+      <div class="basemap-grid">
+        <button class="basemap-btn active" data-base="satellite">🛰️ Satelital</button>
+        <button class="basemap-btn" data-base="topo">🏔️ Topográfico</button>
+        <button class="basemap-btn" data-base="osm">🗺️ OSM</button>
+        <button class="basemap-btn" data-base="dark">🌑 Oscuro</button>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">④ Información del parámetro</div>
+      <div class="param-card" id="param-info"></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">⑤ Leyenda NCh1333</div>
+      <div class="legend" id="legend-box"></div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">⑥ Opciones de visualización</div>
+      <div class="bottom-legend">
+        <label class="bl-toggle">
+          <input type="checkbox" id="chk-labels-val">
+          <span>Etiquetas de valor numérico</span>
+        </label>
+        <label class="bl-toggle">
+          <input type="checkbox" id="chk-labels-est">
+          <span>Etiquetas de estaciones</span>
+        </label>
+        <label class="bl-toggle">
+          <input type="checkbox" id="chk-halos" checked>
+          <span>Halos de severidad</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-label">⑦ Estadísticas de la cota activa</div>
+      <div class="stats-bar" id="stats-box"></div>
+    </div>
+  </aside>
+
+  <div class="map-wrap">
+    <div id="map"></div>
+    <div class="map-info" id="map-info"></div>
+    <div class="loading-overlay" id="loading">
+      <div class="loading-spinner"></div>
+      <div id="loading-text">Cargando librería de mapas…</div>
+    </div>
+  </div>
+</div>
+
+<!-- Leaflet JS con fallback a múltiples CDN -->
+<script>
+// Cargador secuencial con fallbacks
+const CDN_URLS = [
+  'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js',
+  'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js',
+];
+
+function loadScript(url) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = url;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function loadLeaflet() {
+  for (const url of CDN_URLS) {
+    try {
+      await loadScript(url);
+      if (typeof L !== 'undefined') {
+        console.log('Leaflet cargado desde:', url);
+        return true;
+      }
+    } catch (e) {
+      console.warn('Falló CDN:', url);
+    }
+  }
+  return false;
+}
+
+loadLeaflet().then(ok => {
+  if (ok) {
+    initApp();
+  } else {
+    document.getElementById('loading').innerHTML = `
+      <div class="loading-fail">
+        <div style="font-size:40px;margin-bottom:14px;">⚠️</div>
+        <div style="font-weight:700;color:#f1f5f9;margin-bottom:8px;">No se pudo cargar Leaflet</div>
+        <div>Verifica tu conexión a internet. Este visor requiere cargar la librería de mapas desde un CDN. Si estás offline, usa la versión autocontenida sin mapa base.</div>
+      </div>`;
+  }
+});
+</script>
+
+<script>
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+const DATA = {"sup":[{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"SUPERFICIE","sub_id":1,"hora":"08:03","lat":-38.8904654607726,"lon":-73.3174732358075,"pH":9.24,"OD":11.29,"pct_OD":130.5,"FNU":68.7,"temp":20.6,"ORP":-15.2,"cond":12654.0,"TDS":6327.0,"PSU":7.29},{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"SUPERFICIE","sub_id":3,"hora":"08:09","lat":-38.8905327315355,"lon":-73.3174907914338,"pH":9.19,"OD":12.33,"pct_OD":142.3,"FNU":19.6,"temp":20.5,"ORP":10.1,"cond":12634.0,"TDS":6317.0,"PSU":7.28},{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"SUPERFICIE","sub_id":5,"hora":"08:15","lat":-38.8905537536358,"lon":-73.317496193165,"pH":9.11,"OD":12.37,"pct_OD":143.1,"FNU":18.1,"temp":20.6,"ORP":23.7,"cond":12485.0,"TDS":6242.0,"PSU":7.18},{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"SUPERFICIE","sub_id":7,"hora":"08:21","lat":-38.890576877939,"lon":-73.3175137487912,"pH":9.1,"OD":11.32,"pct_OD":130.9,"FNU":23.9,"temp":20.7,"ORP":28.7,"cond":12361.0,"TDS":6180.0,"PSU":7.1},{"lugar":"ROMOPULLI - HUAPI BUDI","cota":"SUPERFICIE","sub_id":1,"hora":"09:05","lat":-38.851360866087,"lon":-73.298434953582,"pH":8.53,"OD":9.34,"pct_OD":107.1,"FNU":45.6,"temp":20.3,"ORP":56.3,"cond":12120.0,"TDS":6060.0,"PSU":6.96},{"lugar":"ROMOPULLI - HUAPI BUDI","cota":"SUPERFICIE","sub_id":2,"hora":"09:08","lat":-38.8514465084691,"lon":-73.2985851572841,"pH":8.54,"OD":8.84,"pct_OD":101.3,"FNU":66.6,"temp":20.2,"ORP":59.2,"cond":12187.0,"TDS":6094.0,"PSU":7.0},{"lugar":"PUENTE BUDI","cota":"SUPERFICIE","sub_id":1,"hora":"09:40","lat":-38.8283038214499,"lon":-73.3702128824982,"pH":8.74,"OD":9.84,"pct_OD":111.9,"FNU":6.1,"temp":19.6,"ORP":61.1,"cond":13670.0,"TDS":6835.0,"PSU":7.93},{"lugar":"PUENTE BUDI","cota":"SUPERFICIE","sub_id":2,"hora":"09:43","lat":-38.8283038214499,"lon":-73.3702128824982,"pH":8.78,"OD":9.63,"pct_OD":109.6,"FNU":5.7,"temp":19.6,"ORP":63.0,"cond":13753.0,"TDS":6876.0,"PSU":7.98},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":2,"hora":"12:13","lat":-38.9016660736913,"lon":-73.259865401151,"pH":9.1,"OD":7.72,"pct_OD":90.5,"FNU":15.7,"temp":21.2,"ORP":19.8,"cond":14011.0,"TDS":7006.0,"PSU":8.13},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":3,"hora":"12:14","lat":-38.9016823424899,"lon":-73.2597534100166,"pH":8.83,"OD":5.83,"pct_OD":66.9,"FNU":47.5,"temp":20.1,"ORP":33.0,"cond":13966.0,"TDS":6983.0,"PSU":8.11},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":5,"hora":"12:16","lat":-38.9017009353979,"lon":-73.2596339528065,"pH":8.99,"OD":6.75,"pct_OD":78.3,"FNU":20.9,"temp":20.6,"ORP":29.5,"cond":13918.0,"TDS":6959.0,"PSU":8.08},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":7,"hora":"12:18","lat":-38.9017055836242,"lon":-73.259521961672,"pH":9.12,"OD":7.25,"pct_OD":85.0,"FNU":21.6,"temp":21.2,"ORP":26.7,"cond":13869.0,"TDS":6934.0,"PSU":8.04},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":9,"hora":"12:20","lat":-38.9017160421322,"lon":-73.2594069841072,"pH":9.08,"OD":7.43,"pct_OD":86.4,"FNU":16.1,"temp":20.8,"ORP":32.4,"cond":13900.0,"TDS":6950.0,"PSU":8.06},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":11,"hora":"12:22","lat":-38.9017276626948,"lon":-73.2592875268971,"pH":9.16,"OD":8.38,"pct_OD":98.3,"FNU":27.4,"temp":21.3,"ORP":32.5,"cond":13926.0,"TDS":6963.0,"PSU":8.08},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":13,"hora":"12:24","lat":-38.9017408190222,"lon":-73.2591761741258,"pH":9.19,"OD":8.88,"pct_OD":104.3,"FNU":27.2,"temp":21.3,"ORP":34.7,"cond":13920.0,"TDS":6960.0,"PSU":8.07},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":16,"hora":"12:27","lat":-38.9017518509097,"lon":-73.2590556804861,"pH":9.23,"OD":9.57,"pct_OD":111.9,"FNU":35.5,"temp":21.1,"ORP":37.4,"cond":13938.0,"TDS":6969.0,"PSU":8.09},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":18,"hora":"12:29","lat":-38.9017650891723,"lon":-73.2589479449965,"pH":9.28,"OD":10.09,"pct_OD":117.7,"FNU":43.6,"temp":21.0,"ORP":38.0,"cond":13880.0,"TDS":6940.0,"PSU":8.05},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":20,"hora":"12:31","lat":-38.901772811491,"lon":-73.2588274513568,"pH":9.26,"OD":10.18,"pct_OD":119.0,"FNU":29.6,"temp":21.1,"ORP":40.9,"cond":13955.0,"TDS":6977.0,"PSU":8.1},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":22,"hora":"12:33","lat":-38.9017915656902,"lon":-73.2587197158672,"pH":9.24,"OD":10.19,"pct_OD":119.2,"FNU":31.4,"temp":21.1,"ORP":44.6,"cond":13882.0,"TDS":6941.0,"PSU":8.05},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":23,"hora":"12:34","lat":-38.9018014943833,"lon":-73.2586048925037,"pH":9.11,"OD":9.36,"pct_OD":106.4,"FNU":75.4,"temp":19.6,"ORP":51.9,"cond":13811.0,"TDS":6906.0,"PSU":8.02},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":26,"hora":"12:37","lat":-38.9018081135103,"lon":-73.2584929042974,"pH":9.18,"OD":9.71,"pct_OD":113.2,"FNU":39.7,"temp":21.0,"ORP":50.5,"cond":13796.0,"TDS":6898.0,"PSU":8.0},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":28,"hora":"12:39","lat":-38.9018191453873,"lon":-73.2583780809466,"pH":9.11,"OD":9.52,"pct_OD":109.8,"FNU":59.0,"temp":20.4,"ORP":55.5,"cond":13914.0,"TDS":6957.0,"PSU":8.08},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":29,"hora":"12:40","lat":-38.90183128045,"lon":-73.2582590048791,"pH":9.04,"OD":9.07,"pct_OD":104.7,"FNU":74.1,"temp":20.4,"ORP":59.2,"cond":13848.0,"TDS":6924.0,"PSU":8.03},{"lugar":"LA CHASQUILLA","cota":"SUPERFICIE","sub_id":31,"hora":"12:42","lat":-38.901845621885,"lon":-73.2581470166728,"pH":8.99,"OD":9.27,"pct_OD":108.2,"FNU":51.3,"temp":21.0,"ORP":61.6,"cond":13789.0,"TDS":6894.0,"PSU":7.99},{"lugar":"COMOE BAJO","cota":"SUPERFICIE","sub_id":2,"hora":"13:07","lat":-38.8950422639943,"lon":-73.2550427304386,"pH":7.29,"OD":7.42,"pct_OD":86.8,"FNU":147.0,"temp":22.5,"ORP":-26.2,"cond":5922.0,"TDS":2961.0,"PSU":3.22},{"lugar":"MUELLE SAN EUVINK","cota":"SUPERFICIE","sub_id":2,"hora":"13:40","lat":-38.8420924619019,"lon":-73.2598024272103,"pH":8.94,"OD":9.89,"pct_OD":119.4,"FNU":29.7,"temp":22.7,"ORP":74.6,"cond":14016.0,"TDS":7008.0,"PSU":8.12},{"lugar":"MUELLE SAN EUVINK","cota":"SUPERFICIE","sub_id":4,"hora":"13:44","lat":-38.8421060411285,"lon":-73.2597548180012,"pH":8.94,"OD":9.79,"pct_OD":118.1,"FNU":119.0,"temp":22.7,"ORP":65.0,"cond":14018.0,"TDS":7009.0,"PSU":8.12},{"lugar":"MUELLE SAN EUVINK","cota":"SUPERFICIE","sub_id":5,"hora":"13:46","lat":-38.8421232762971,"lon":-73.2596998327174,"pH":8.94,"OD":9.89,"pct_OD":118.2,"FNU":60.6,"temp":22.2,"ORP":68.1,"cond":14086.0,"TDS":7043.0,"PSU":8.17},{"lugar":"BOYECO ALTO","cota":"SUPERFICIE","sub_id":1,"hora":"14:16","lat":-38.8999099576581,"lon":-73.2536857989257,"pH":9.62,"OD":8.87,"pct_OD":90.1,"FNU":0.0,"temp":16.2,"ORP":43.1,"cond":14.0,"TDS":7.0,"PSU":0.01},{"lugar":"BOYECO BAJO","cota":"SUPERFICIE","sub_id":1,"hora":"14:30","lat":-38.8970889724114,"lon":-73.255940369477,"pH":7.55,"OD":8.84,"pct_OD":81.1,"FNU":34.6,"temp":11.6,"ORP":36.8,"cond":52.0,"TDS":26.0,"PSU":0.02},{"lugar":"VEGA LOPEZ","cota":"SUPERFICIE","sub_id":1,"hora":"11:17","lat":-38.9116605874625,"lon":-73.2589324390612,"pH":7.1,"OD":5.43,"pct_OD":52.0,"FNU":26.6,"temp":13.5,"ORP":50.5,"cond":165.0,"TDS":82.0,"PSU":0.08},{"lugar":"COMOE ALTO","cota":"SUPERFICIE","sub_id":1,"hora":"14:44","lat":-38.8947934116945,"lon":-73.2538963995833,"pH":7.51,"OD":9.28,"pct_OD":96.6,"FNU":22.2,"temp":17.4,"ORP":92.9,"cond":72.0,"TDS":36.0,"PSU":0.03},{"lugar":"PUNTA EL TORO","cota":"SUPERFICIE","sub_id":2,"hora":"15:27","lat":-38.8403334778533,"lon":-73.2611714884556,"pH":8.26,"OD":6.96,"pct_OD":79.8,"FNU":28.9,"temp":20.1,"ORP":78.3,"cond":12699.0,"TDS":6350.0,"PSU":7.32},{"lugar":"EL TEMO","cota":"SUPERFICIE","sub_id":1,"hora":"15:55","lat":-38.81228000724,"lon":-73.2446215653377,"pH":7.54,"OD":8.87,"pct_OD":82.9,"FNU":48.4,"temp":12.5,"ORP":113.0,"cond":72.0,"TDS":36.0,"PSU":0.03},{"lugar":"ATRACADERO HUENTE","cota":"SUPERFICIE","sub_id":2,"hora":"17:10","lat":-38.9119595636869,"lon":-73.299534857614,"pH":8.11,"OD":6.8,"pct_OD":75.0,"FNU":10.4,"temp":18.4,"ORP":139.0,"cond":12166.0,"TDS":6083.0,"PSU":7.0},{"lugar":"PUENTE WAPI","cota":"SUPERFICIE","sub_id":1,"hora":"17:24","lat":-38.8863582908228,"lon":-73.3476601388849,"pH":9.01,"OD":10.69,"pct_OD":114.0,"FNU":40.2,"temp":18.2,"ORP":127.3,"cond":4301.0,"TDS":2150.0,"PSU":2.3},{"lugar":"MUELLE OPAZO","cota":"SUPERFICIE","sub_id":2,"hora":"17:44","lat":-38.8611203658611,"lon":-73.3602644019136,"pH":8.66,"OD":11.18,"pct_OD":120.9,"FNU":122.0,"temp":17.9,"ORP":96.9,"cond":9952.0,"TDS":4976.0,"PSU":5.64},{"lugar":"PUENTE BUDI ALTO","cota":"SUPERFICIE","sub_id":2,"hora":"18:05","lat":-38.8289906450896,"lon":-73.3689008531015,"pH":7.27,"OD":9.7,"pct_OD":95.3,"FNU":4.4,"temp":14.8,"ORP":176.2,"cond":13174.0,"TDS":6664.0,"PSU":7.53}],"lec":[{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"LECHO","sub_id":2,"hora":"08:06","lat":-38.8904654607726,"lon":-73.3174732358075,"pH":8.2,"OD":7.48,"pct_OD":81.8,"FNU":78.9,"temp":17.8,"ORP":30.7,"cond":12631.0,"TDS":6316.0,"PSU":7.29},{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"LECHO","sub_id":4,"hora":"08:12","lat":-38.8905327315355,"lon":-73.3174907914338,"pH":8.45,"OD":8.43,"pct_OD":93.7,"FNU":135.0,"temp":18.6,"ORP":40.8,"cond":12545.0,"TDS":6273.0,"PSU":7.23},{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"LECHO","sub_id":6,"hora":"08:18","lat":-38.8905537536358,"lon":-73.317496193165,"pH":8.53,"OD":8.72,"pct_OD":98.0,"FNU":257.0,"temp":19.2,"ORP":47.2,"cond":12401.0,"TDS":6200.0,"PSU":7.14},{"lugar":"ISLA HUAPI - SANTA MARTA","cota":"LECHO","sub_id":8,"hora":"08:24","lat":-38.890576877939,"lon":-73.3175137487912,"pH":8.7,"OD":9.45,"pct_OD":107.3,"FNU":71.4,"temp":19.7,"ORP":44.6,"cond":12372.0,"TDS":6186.0,"PSU":7.12},{"lugar":"ROMOPULLI - HUAPI BUDI","cota":"LECHO","sub_id":3,"hora":"09:11","lat":-38.8514465084691,"lon":-73.2985851572841,"pH":8.31,"OD":7.34,"pct_OD":84.2,"FNU":95.0,"temp":20.4,"ORP":61.4,"cond":10990.0,"TDS":5495.0,"PSU":6.26},{"lugar":"PUENTE BUDI","cota":"LECHO","sub_id":3,"hora":"09:46","lat":-38.8283038214499,"lon":-73.3702128824982,"pH":8.69,"OD":8.93,"pct_OD":101.4,"FNU":28.7,"temp":19.4,"ORP":67.5,"cond":13791.0,"TDS":6896.0,"PSU":8.0},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":1,"hora":"12:05","lat":-38.9016660736913,"lon":-73.259865401151,"pH":8.87,"OD":6.92,"pct_OD":79.9,"FNU":18.8,"temp":20.4,"ORP":0.2,"cond":13816.0,"TDS":6908.0,"PSU":8.01},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":4,"hora":"12:15","lat":-38.9016823424899,"lon":-73.2597534100166,"pH":8.84,"OD":5.82,"pct_OD":66.8,"FNU":67.4,"temp":20.1,"ORP":33.5,"cond":13944.0,"TDS":6972.0,"PSU":8.1},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":6,"hora":"12:17","lat":-38.9017009353979,"lon":-73.2596339528065,"pH":8.84,"OD":5.92,"pct_OD":68.0,"FNU":81.1,"temp":20.1,"ORP":35.9,"cond":13920.0,"TDS":6960.0,"PSU":8.08},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":8,"hora":"12:19","lat":-38.9017055836242,"lon":-73.259521961672,"pH":8.93,"OD":6.38,"pct_OD":73.3,"FNU":56.6,"temp":20.2,"ORP":36.7,"cond":13933.0,"TDS":6967.0,"PSU":8.09},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":10,"hora":"12:21","lat":-38.9017160421322,"lon":-73.2594069841072,"pH":8.99,"OD":6.83,"pct_OD":78.6,"FNU":50.4,"temp":20.2,"ORP":37.4,"cond":13934.0,"TDS":6967.0,"PSU":8.09},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":12,"hora":"12:23","lat":-38.9017276626948,"lon":-73.2592875268971,"pH":9.05,"OD":7.38,"pct_OD":85.2,"FNU":81.3,"temp":20.4,"ORP":38.7,"cond":13912.0,"TDS":6956.0,"PSU":8.07},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":14,"hora":"12:25","lat":-38.9017408190222,"lon":-73.2591761741258,"pH":9.07,"OD":7.45,"pct_OD":85.8,"FNU":48.4,"temp":20.3,"ORP":41.4,"cond":13958.0,"TDS":6979.0,"PSU":8.1},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":15,"hora":"12:26","lat":-38.9017518509097,"lon":-73.2590556804861,"pH":9.21,"OD":9.16,"pct_OD":105.9,"FNU":69.6,"temp":20.5,"ORP":38.0,"cond":13931.0,"TDS":6966.0,"PSU":8.09},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":17,"hora":"12:28","lat":-38.9017650891723,"lon":-73.2589479449965,"pH":9.26,"OD":10.03,"pct_OD":115.9,"FNU":91.3,"temp":20.5,"ORP":38.2,"cond":13934.0,"TDS":6967.0,"PSU":8.09},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":19,"hora":"12:30","lat":-38.901772811491,"lon":-73.2588274513568,"pH":9.27,"OD":9.98,"pct_OD":114.5,"FNU":78.3,"temp":20.1,"ORP":41.1,"cond":14025.0,"TDS":7013.0,"PSU":8.15},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":21,"hora":"12:32","lat":-38.9017915656902,"lon":-73.2587197158672,"pH":9.21,"OD":10.14,"pct_OD":115.3,"FNU":29.6,"temp":19.6,"ORP":46.4,"cond":13958.0,"TDS":6979.0,"PSU":8.11},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":24,"hora":"12:35","lat":-38.9018014943833,"lon":-73.2586048925037,"pH":9.23,"OD":8.34,"pct_OD":96.5,"FNU":46.6,"temp":20.6,"ORP":47.9,"cond":13732.0,"TDS":6866.0,"PSU":7.96},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":25,"hora":"12:36","lat":-38.9018081135103,"lon":-73.2584929042974,"pH":9.16,"OD":9.6,"pct_OD":110.2,"FNU":82.9,"temp":20.1,"ORP":52.5,"cond":13864.0,"TDS":6932.0,"PSU":8.05},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":27,"hora":"12:38","lat":-38.9018191453873,"lon":-73.2583780809466,"pH":8.99,"OD":8.93,"pct_OD":100.9,"FNU":49.4,"temp":19.3,"ORP":60.3,"cond":13945.0,"TDS":6973.0,"PSU":8.1},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":30,"hora":"12:41","lat":-38.90183128045,"lon":-73.2582590048791,"pH":8.92,"OD":8.9,"pct_OD":101.4,"FNU":254.0,"temp":19.8,"ORP":64.8,"cond":13841.0,"TDS":6920.0,"PSU":8.03},{"lugar":"LA CHASQUILLA","cota":"LECHO","sub_id":32,"hora":"12:43","lat":-38.901845621885,"lon":-73.2581470166728,"pH":8.72,"OD":8.08,"pct_OD":94.6,"FNU":330.0,"temp":21.1,"ORP":71.0,"cond":13920.0,"TDS":6960.0,"PSU":8.07},{"lugar":"COMOE BAJO","cota":"LECHO","sub_id":1,"hora":"13:05","lat":-38.8950422639943,"lon":-73.2550427304386,"pH":7.12,"OD":2.83,"pct_OD":33.1,"FNU":245.0,"temp":22.6,"ORP":-38.6,"cond":6108.0,"TDS":3054.0,"PSU":3.33},{"lugar":"MUELLE SAN EUVINK","cota":"LECHO","sub_id":1,"hora":"13:38","lat":-38.8420924619019,"lon":-73.2598024272103,"pH":8.91,"OD":9.83,"pct_OD":118.5,"FNU":37.1,"temp":22.7,"ORP":81.0,"cond":13960.0,"TDS":6980.0,"PSU":8.09},{"lugar":"MUELLE SAN EUVINK","cota":"LECHO","sub_id":3,"hora":"13:42","lat":-38.8421060411285,"lon":-73.2597548180012,"pH":8.96,"OD":9.89,"pct_OD":119.3,"FNU":27.8,"temp":22.7,"ORP":70.4,"cond":13953.0,"TDS":6977.0,"PSU":8.08},{"lugar":"MUELLE SAN EUVINK","cota":"LECHO","sub_id":6,"hora":"13:48","lat":-38.8421232762971,"lon":-73.2596998327174,"pH":8.61,"OD":5.91,"pct_OD":71.7,"FNU":278.0,"temp":22.9,"ORP":-110.9,"cond":14001.0,"TDS":7000.0,"PSU":8.11},{"lugar":"BOYECO ALTO","cota":"LECHO","sub_id":2,"hora":"14:19","lat":-38.8999099576581,"lon":-73.2536857989257,"pH":7.48,"OD":8.73,"pct_OD":80.0,"FNU":51.8,"temp":11.6,"ORP":29.9,"cond":50.0,"TDS":25.0,"PSU":0.02},{"lugar":"BOYECO BAJO","cota":"LECHO","sub_id":2,"hora":"14:33","lat":-38.8970889724114,"lon":-73.255940369477,"pH":7.28,"OD":7.94,"pct_OD":72.9,"FNU":669.0,"temp":11.7,"ORP":9.7,"cond":62.0,"TDS":31.0,"PSU":0.03},{"lugar":"VEGA LOPEZ","cota":"LECHO","sub_id":2,"hora":"11:19","lat":-38.9116605874625,"lon":-73.2589324390612,"pH":6.67,"OD":4.76,"pct_OD":45.5,"FNU":25.7,"temp":13.4,"ORP":72.9,"cond":160.0,"TDS":80.0,"PSU":0.08},{"lugar":"COMOE ALTO","cota":"LECHO","sub_id":2,"hora":"14:48","lat":-38.8947934116945,"lon":-73.2538963995833,"pH":7.17,"OD":8.51,"pct_OD":86.9,"FNU":481.0,"temp":16.5,"ORP":91.3,"cond":235.0,"TDS":118.0,"PSU":0.11},{"lugar":"PUNTA EL TORO","cota":"LECHO","sub_id":1,"hora":"15:21","lat":-38.8403334778533,"lon":-73.2611714884556,"pH":8.17,"OD":6.7,"pct_OD":76.4,"FNU":46.9,"temp":19.8,"ORP":83.4,"cond":12591.0,"TDS":6295.0,"PSU":7.25},{"lugar":"EL TEMO","cota":"LECHO","sub_id":2,"hora":"16:01","lat":-38.81228000724,"lon":-73.2446215653377,"pH":7.26,"OD":7.92,"pct_OD":73.9,"FNU":43.3,"temp":12.5,"ORP":118.6,"cond":72.0,"TDS":36.0,"PSU":0.03},{"lugar":"ATRACADERO HUENTE","cota":"LECHO","sub_id":1,"hora":"17:03","lat":-38.9119595636869,"lon":-73.299534857614,"pH":8.02,"OD":6.75,"pct_OD":74.3,"FNU":10.8,"temp":18.3,"ORP":140.1,"cond":12189.0,"TDS":6094.0,"PSU":7.01},{"lugar":"PUENTE WAPI","cota":"LECHO","sub_id":2,"hora":"17:28","lat":-38.8863582908228,"lon":-73.3476601388849,"pH":9.14,"OD":10.29,"pct_OD":109.9,"FNU":47.3,"temp":18.3,"ORP":125.2,"cond":3959.0,"TDS":1980.0,"PSU":2.11},{"lugar":"MUELLE OPAZO","cota":"LECHO","sub_id":1,"hora":"17:40","lat":-38.8611203658611,"lon":-73.3602644019136,"pH":8.97,"OD":8.38,"pct_OD":91.9,"FNU":87.0,"temp":18.6,"ORP":127.9,"cond":10003.0,"TDS":5002.0,"PSU":5.67},{"lugar":"PUENTE BUDI ALTO","cota":"LECHO","sub_id":1,"hora":"18:00","lat":-38.8289906450896,"lon":-73.3689008531015,"pH":8.91,"OD":8.57,"pct_OD":94.1,"FNU":14.3,"temp":18.0,"ORP":113.3,"cond":13065.0,"TDS":6533.0,"PSU":7.56}],"stats":{"pH":{"min":6.67,"max":9.62,"mean":8.65},"OD":{"min":2.83,"max":12.37,"mean":8.58},"FNU":{"min":0.0,"max":669.0,"mean":77.45},"temp":{"min":11.6,"max":22.9,"mean":19.38},"ORP":{"min":-110.9,"max":176.2,"mean":53.53},"cond":{"min":14.0,"max":14086.0,"mean":11116.23},"TDS":{"min":7.0,"max":7043.0,"mean":5559.18},"PSU":{"min":0.01,"max":8.17,"mean":6.42}}};
+
+// ═══════════════════════════════════════
+// CONFIG PARAMETROS
+// ═══════════════════════════════════════
+const PARAMS = {
+  pH:     {label:'pH',                unit:'',       norm:'6,0 – 9,0 (Tablas 3 y 4)',         limMin:6.0, limMax:9.0, type:'range',  decimals:2},
+  OD:     {label:'Oxígeno disuelto',  unit:'mg/L',   norm:'≥ 5,0 (Tablas 3 y 4)',             limMin:5.0, limMax:null,type:'minimum',decimals:2},
+  pct_OD: {label:'Saturación OD',     unit:'%',      norm:'80–120% óptimo',                   limMin:80,  limMax:120, type:'range',  decimals:1},
+  FNU:    {label:'Turbiedad',         unit:'FNU',    norm:'≤ 30 (ref. Art. 8.1.1)',           limMin:null,limMax:30,  type:'maximum',decimals:1},
+  temp:   {label:'Temperatura',       unit:'°C',     norm:'≤ 25 referencial',                 limMin:null,limMax:25,  type:'maximum',decimals:1},
+  ORP:    {label:'ORP (redox)',       unit:'mV',     norm:'> 0 (oxidante, ref.)',             limMin:0,   limMax:null,type:'minimum',decimals:1},
+  cond:   {label:'Conductividad',     unit:'µS/cm',  norm:'Ref. salinidad',                   limMin:null,limMax:null,type:'range',  decimals:0},
+  TDS:    {label:'Sólidos disueltos', unit:'mg/L',   norm:'Ref. Tabla 2',                     limMin:null,limMax:null,type:'range',  decimals:0},
+  PSU:    {label:'Salinidad',         unit:'PSU',    norm:'Mixohalino natural Lago Budi',     limMin:null,limMax:null,type:'range',  decimals:2},
+};
+
+// ═══════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════
+let state = {
+  cota: 'SUPERFICIE',
+  param: 'OD',
+  basemap: 'satellite',
+  labelsVal: false,
+  labelsEst: false,
+  halos: true,
+};
+
+// ═══════════════════════════════════════
+// COLOR / RADIUS
+// ═══════════════════════════════════════
+function colorFor(param, value) {
+  const cfg = PARAMS[param];
+  if (value == null || isNaN(value)) return '#64748b';
+  if (cfg.type === 'minimum' && cfg.limMin != null) {
+    if (value < cfg.limMin * 0.4) return '#ef4444';
+    if (value < cfg.limMin)       return '#f59e0b';
+    if (value < cfg.limMin * 1.4) return '#22c55e';
+    return '#16a34a';
+  }
+  if (cfg.type === 'maximum' && cfg.limMax != null) {
+    if (value > cfg.limMax * 3)   return '#ef4444';
+    if (value > cfg.limMax * 1.5) return '#f59e0b';
+    if (value > cfg.limMax)       return '#eab308';
+    return '#22c55e';
+  }
+  if (cfg.type === 'range') {
+    if (cfg.limMin != null && cfg.limMax != null) {
+      if (value < cfg.limMin || value > cfg.limMax) {
+        const dist = Math.min(
+          cfg.limMin != null ? Math.max(0, cfg.limMin - value) : Infinity,
+          cfg.limMax != null ? Math.max(0, value - cfg.limMax) : Infinity
+        );
+        return dist > 1 ? '#ef4444' : '#f59e0b';
+      }
+      return '#22c55e';
+    }
+    const s = DATA.stats[param];
+    const range = s.max - s.min;
+    if (range === 0) return '#38bdf8';
+    const pct = (value - s.min) / range;
+    if (pct < 0.33) return '#38bdf8';
+    if (pct < 0.66) return '#a78bfa';
+    return '#f472b6';
+  }
+  return '#64748b';
+}
+
+function radiusFor(param, value) {
+  const s = DATA.stats[param];
+  if (!s || s.max === s.min) return 9;
+  const normalized = Math.abs(value - s.mean) / Math.max(Math.abs(s.max - s.mean), Math.abs(s.mean - s.min), 0.01);
+  return 7 + normalized * 10;
+}
+
+function severityFor(param, value) {
+  const cfg = PARAMS[param];
+  if (cfg.type === 'minimum' && cfg.limMin != null) {
+    return Math.max(0, Math.min(1, (cfg.limMin - value) / cfg.limMin));
+  }
+  if (cfg.type === 'maximum' && cfg.limMax != null) {
+    return Math.max(0, Math.min(1, (value - cfg.limMax) / cfg.limMax / 2));
+  }
+  if (cfg.type === 'range' && cfg.limMin != null && cfg.limMax != null) {
+    if (value < cfg.limMin) return Math.min(1, cfg.limMin - value);
+    if (value > cfg.limMax) return Math.min(1, value - cfg.limMax);
+    return 0.1;
+  }
+  return 0.3;
+}
+
+// ═══════════════════════════════════════
+// INIT APP (se llama cuando Leaflet está listo)
+// ═══════════════════════════════════════
+let map, currentBasemap, markerLayer, haloLayer, labelValLayer, labelEstLayer;
+
+function initApp() {
+  document.getElementById('loading').style.display = 'none';
+
+  // Bounds del área de datos
+  const allPts = [...DATA.sup, ...DATA.lec];
+  const latBounds = allPts.map(d => [d.lat, d.lon]);
+
+  // Centro: cálculo a partir de extremos
+  const lats = allPts.map(d => d.lat), lons = allPts.map(d => d.lon);
+  const center = [(Math.min(...lats) + Math.max(...lats)) / 2, (Math.min(...lons) + Math.max(...lons)) / 2];
+
+  map = L.map('map', {
+    center, zoom: 12, zoomControl: true, attributionControl: true,
+    preferCanvas: false,
+  });
+  map.fitBounds(latBounds, { padding: [50, 50] });
+
+  // Basemaps
+  const basemaps = {
+    satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles © Esri — World Imagery',
+      maxZoom: 19,
+    }),
+    topo: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenTopoMap (CC-BY-SA) · © OpenStreetMap contributors',
+      maxZoom: 17,
+    }),
+    osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19,
+    }),
+    dark: L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap · © CARTO',
+      subdomains: 'abcd', maxZoom: 19,
+    }),
+  };
+
+  currentBasemap = basemaps.satellite.addTo(map);
+
+  // Layers
+  haloLayer = L.layerGroup().addTo(map);
+  markerLayer = L.layerGroup().addTo(map);
+  labelValLayer = L.layerGroup().addTo(map);
+  labelEstLayer = L.layerGroup().addTo(map);
+
+  // Etiqueta fuente sobre mapa
+  map.createPane('labels');
+  map.getPane('labels').style.zIndex = 650;
+  map.getPane('labels').style.pointerEvents = 'none';
+
+  // Bind UI
+  document.getElementById('btn-sup').addEventListener('click', () => {
+    state.cota = 'SUPERFICIE';
+    document.getElementById('btn-sup').classList.add('active');
+    document.getElementById('btn-lec').classList.remove('active');
+    render();
+  });
+  document.getElementById('btn-lec').addEventListener('click', () => {
+    state.cota = 'LECHO';
+    document.getElementById('btn-lec').classList.add('active');
+    document.getElementById('btn-sup').classList.remove('active');
+    render();
+  });
+  document.getElementById('sel-param').addEventListener('change', (e) => {
+    state.param = e.target.value; render();
+  });
+  document.querySelectorAll('.basemap-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.basemap-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.basemap = btn.dataset.base;
+      map.removeLayer(currentBasemap);
+      currentBasemap = basemaps[state.basemap].addTo(map);
+      currentBasemap.bringToBack();
+    });
+  });
+  document.getElementById('chk-labels-val').addEventListener('change', (e) => {
+    state.labelsVal = e.target.checked; render();
+  });
+  document.getElementById('chk-labels-est').addEventListener('change', (e) => {
+    state.labelsEst = e.target.checked; render();
+  });
+  document.getElementById('chk-halos').addEventListener('change', (e) => {
+    state.halos = e.target.checked; render();
+  });
+
+  render();
+}
+
+// ═══════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════
+function render() {
+  markerLayer.clearLayers();
+  haloLayer.clearLayers();
+  labelValLayer.clearLayers();
+  labelEstLayer.clearLayers();
+
+  const points = state.cota === 'SUPERFICIE' ? DATA.sup : DATA.lec;
+  const cfg = PARAMS[state.param];
+
+  // Halos
+  if (state.halos) {
+    points.forEach(p => {
+      const v = p[state.param];
+      if (v == null) return;
+      const sev = severityFor(state.param, v);
+      const col = colorFor(state.param, v);
+      const opacity = 0.08 + sev * 0.25;
+      L.circleMarker([p.lat, p.lon], {
+        radius: 20 + sev * 15,
+        fillColor: col, color: col,
+        weight: 0, fillOpacity: opacity,
+        interactive: false,
+      }).addTo(haloLayer);
+    });
+  }
+
+  // Markers
+  points.forEach(p => {
+    const v = p[state.param];
+    const col = colorFor(state.param, v);
+    const rad = radiusFor(state.param, v);
+
+    const marker = L.circleMarker([p.lat, p.lon], {
+      radius: rad, fillColor: col, color: '#0b1220',
+      weight: 2, opacity: 1, fillOpacity: 0.9,
+    });
+
+    const popupHtml = `
+      <div class="popup-title">${p.lugar}</div>
+      <div class="popup-meta">${p.cota} · Sub ID ${p.sub_id} · ${p.hora} hrs</div>
+      <div class="popup-highlighted">
+        <div class="popup-hlabel">${cfg.label}</div>
+        <div class="popup-hvalue" style="color:${col}">${Number(v).toFixed(cfg.decimals)} ${cfg.unit}</div>
+      </div>
+      <div class="popup-params">
+        <div class="pp-row"><span class="pp-lbl">pH</span><span style="color:${colorFor('pH',p.pH)}">${p.pH}</span></div>
+        <div class="pp-row"><span class="pp-lbl">OD</span><span style="color:${colorFor('OD',p.OD)}">${p.OD} mg/L</span></div>
+        <div class="pp-row"><span class="pp-lbl">FNU</span><span style="color:${colorFor('FNU',p.FNU)}">${p.FNU}</span></div>
+        <div class="pp-row"><span class="pp-lbl">T°</span><span>${p.temp} °C</span></div>
+        <div class="pp-row"><span class="pp-lbl">ORP</span><span style="color:${colorFor('ORP',p.ORP)}">${p.ORP} mV</span></div>
+        <div class="pp-row"><span class="pp-lbl">Cond.</span><span>${p.cond.toLocaleString()} µS/cm</span></div>
+        <div class="pp-row"><span class="pp-lbl">PSU</span><span>${p.PSU}</span></div>
+        <div class="pp-row"><span class="pp-lbl">TDS</span><span>${p.TDS.toLocaleString()} mg/L</span></div>
+      </div>
+      <div class="popup-coords">${p.lat.toFixed(6)}, ${p.lon.toFixed(6)}</div>
+    `;
+    marker.bindPopup(popupHtml, { maxWidth: 320 });
+    marker.addTo(markerLayer);
+
+    // Etiquetas
+    if (state.labelsVal) {
+      L.marker([p.lat, p.lon], {
+        icon: L.divIcon({
+          className: 'leaflet-label',
+          html: `<div style="border-color:${col}">${Number(v).toFixed(cfg.decimals)}</div>`,
+          iconSize: [1,1], iconAnchor: [0, rad + 8],
+        }),
+        pane: 'labels', interactive: false,
+      }).addTo(labelValLayer);
+    }
+  });
+
+  // Etiquetas de estaciones
+  if (state.labelsEst) {
+    const groups = {};
+    points.forEach(p => {
+      if (!groups[p.lugar]) groups[p.lugar] = [];
+      groups[p.lugar].push(p);
+    });
+    Object.entries(groups).forEach(([lugar, pts]) => {
+      const lat = pts.reduce((a,p)=>a+p.lat,0)/pts.length;
+      const lon = pts.reduce((a,p)=>a+p.lon,0)/pts.length;
+      L.marker([lat, lon], {
+        icon: L.divIcon({
+          className: 'leaflet-station-label',
+          html: `<div>${lugar}</div>`,
+          iconSize: [1,1], iconAnchor: [0, -20],
+        }),
+        pane: 'labels', interactive: false,
+      }).addTo(labelEstLayer);
+    });
+  }
+
+  updatePanels(points);
+}
+
+// ═══════════════════════════════════════
+// PANELS
+// ═══════════════════════════════════════
+function updatePanels(points) {
+  const cfg = PARAMS[state.param];
+  const vals = points.map(p => p[state.param]).filter(v => v != null);
+  const pMin = Math.min(...vals), pMax = Math.max(...vals);
+  const pMean = vals.reduce((a,b)=>a+b,0)/vals.length;
+
+  document.getElementById('param-info').innerHTML = `
+    <div class="pc-title">${cfg.label}${cfg.unit?' ('+cfg.unit+')':''}</div>
+    <div class="pc-norm">${cfg.norm}</div>
+    <div class="pc-stats">
+      <div class="pc-stat"><div class="v" style="color:#4ade80">${pMin.toFixed(cfg.decimals)}</div><div class="l">Mín</div></div>
+      <div class="pc-stat"><div class="v" style="color:#fbbf24">${pMean.toFixed(cfg.decimals)}</div><div class="l">Media</div></div>
+      <div class="pc-stat"><div class="v" style="color:#f87171">${pMax.toFixed(cfg.decimals)}</div><div class="l">Máx</div></div>
+    </div>
+  `;
+
+  let legHtml = `<div class="leg-title">Escala — ${cfg.label}</div>`;
+  if (cfg.type === 'minimum' && cfg.limMin != null) {
+    legHtml += `<div class="leg-band">
+      <div class="leg-band-item lbi-fail">&lt; ${(cfg.limMin*0.4).toFixed(cfg.decimals)}</div>
+      <div class="leg-band-item lbi-warn">&lt; ${cfg.limMin.toFixed(cfg.decimals)}</div>
+      <div class="leg-band-item lbi-ok">≥ ${cfg.limMin.toFixed(cfg.decimals)}</div>
+    </div>
+    <div class="size-info">Colores según cumplimiento NCh1333 (${cfg.norm}). Tamaño: desviación de la media.</div>`;
+  } else if (cfg.type === 'maximum' && cfg.limMax != null) {
+    legHtml += `<div class="leg-band">
+      <div class="leg-band-item lbi-ok">≤ ${cfg.limMax}</div>
+      <div class="leg-band-item lbi-warn">≤ ${(cfg.limMax*1.5).toFixed(0)}</div>
+      <div class="leg-band-item lbi-fail">&gt; ${(cfg.limMax*3).toFixed(0)}</div>
+    </div>
+    <div class="size-info">Colores según cumplimiento NCh1333 (${cfg.norm}). Tamaño: desviación de la media.</div>`;
+  } else if (cfg.type === 'range' && cfg.limMin != null && cfg.limMax != null) {
+    legHtml += `<div class="leg-band">
+      <div class="leg-band-item lbi-fail">&lt; ${cfg.limMin}</div>
+      <div class="leg-band-item lbi-ok">${cfg.limMin} – ${cfg.limMax}</div>
+      <div class="leg-band-item lbi-fail">&gt; ${cfg.limMax}</div>
+    </div>
+    <div class="size-info">Colores según rango normativo (${cfg.norm}). Tamaño: desviación de la media.</div>`;
+  } else {
+    const s = DATA.stats[state.param];
+    legHtml += `<div class="leg-band">
+      <div class="leg-band-item" style="background:#38bdf8;color:#0b1220">${s.min}</div>
+      <div class="leg-band-item" style="background:#a78bfa;color:#0b1220">${s.mean}</div>
+      <div class="leg-band-item" style="background:#f472b6;color:#0b1220">${s.max}</div>
+    </div>
+    <div class="size-info">Sin límite normativo. Gradiente relativo al rango del monitoreo.</div>`;
+  }
+  document.getElementById('legend-box').innerHTML = legHtml;
+
+  document.getElementById('stats-box').innerHTML = `
+    <div class="sb-row"><span class="lbl">n muestras</span><span class="val">${points.length}</span></div>
+    <div class="sb-row"><span class="lbl">Mín observado</span><span class="val" style="color:#4ade80">${pMin.toFixed(cfg.decimals)} ${cfg.unit}</span></div>
+    <div class="sb-row"><span class="lbl">Media</span><span class="val">${pMean.toFixed(cfg.decimals)} ${cfg.unit}</span></div>
+    <div class="sb-row"><span class="lbl">Máx observado</span><span class="val" style="color:#f87171">${pMax.toFixed(cfg.decimals)} ${cfg.unit}</span></div>
+  `;
+
+  const fueraNorma = vals.filter(v => {
+    if (cfg.type === 'minimum' && cfg.limMin != null) return v < cfg.limMin;
+    if (cfg.type === 'maximum' && cfg.limMax != null) return v > cfg.limMax;
+    if (cfg.type === 'range' && cfg.limMin != null && cfg.limMax != null) return v < cfg.limMin || v > cfg.limMax;
+    return false;
+  }).length;
+  const pctFuera = vals.length > 0 ? ((fueraNorma / vals.length) * 100).toFixed(0) : 0;
+
+  document.getElementById('map-info').innerHTML = `
+    <div class="mi-row"><span class="l">Cota</span><span class="v" style="color:${state.cota==='SUPERFICIE'?'#38bdf8':'#a78bfa'}">${state.cota}</span></div>
+    <div class="mi-row"><span class="l">Parámetro</span><span class="v">${cfg.label}</span></div>
+    <div class="mi-row"><span class="l">Muestras</span><span class="v">${points.length}</span></div>
+    <div class="mi-row"><span class="l">Fuera norma</span><span class="v" style="color:${fueraNorma>0?'#f87171':'#4ade80'}">${fueraNorma} (${pctFuera}%)</span></div>
+  `;
+}
+</script>
+</body>
+</html>
