@@ -1,0 +1,16 @@
+---
+title: "Diagnóstico ambiental rural con dron Phantom 4 Pro"
+subtitle: "Qué se puede y qué no en municipios de menos de 20 mil habitantes"
+author: "Francisco Rubilar Rocha"
+date: "2026-01-30"
+categories: [drones, gestión municipal, La Araucanía]
+image: portada.jpg
+---
+
+Aquí escribes el cuerpo del artículo en markdown normal.
+
+## Subtítulos así
+
+Texto, **negritas**, *cursivas*, [enlaces](https://ejemplo.com).
+
+![Caption de imagen](mi-imagen.png)
